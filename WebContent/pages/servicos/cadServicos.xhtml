@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<h:form id="frmCadastroUsuario" acceptcharset="ISO-8859-1">
+
+			<div id="tudo">
+				<div style="display: block; padding: 4.1em;">
+
+					<h4>Cadastro Professores</h4>
+					<hr />
+					<br />
+					<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Nome do Serviço</label>
+							<h:inputText value="#{cadServicosMB.servicos.nomeservicos}"
+								class="form-control" placeholder="Email" />
+						</div>
+						<div class="form-group col-md-6">
+							<label>Carga Horaria</label>
+							<h:inputText value="#{cadServicosMB.servicos.cargahoraria}"
+								class="form-control" placeholder="Email" />
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label>Valor</label>
+							<h:inputText value="#{cadServicosMB.servicos.valor}"
+								class="form-control" placeholder="Email" >
+								<f:convertNumber pattern="##,###,###,###.##"
+											minFractionDigits="2" />
+							</h:inputText>
+						</div>
+					</div>
+					
+					<br />
+					<hr />
+					<div align="center">
+
+						<p:commandLink ajax="false" update="growl" 
+							styleClass="btn btn-success" value="Confirmar"
+							action="#{cadServicosMB.salvar()}" />
+
+						<p:commandLink ajax="false" styleClass="btn btn-danger" style="margin-left:1%;"
+							value="Cancelar" action="#{cadServicosMB.cancelar()}" />
+
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

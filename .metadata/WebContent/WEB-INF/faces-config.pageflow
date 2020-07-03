@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15937779944170" configfile="/sistemaWK/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1522" id="pf15937780205491" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf15937780205492 pf15937834078790 pf15937898599472 pf15937898599473 pf159379839781712 pf159379839781713 pf159380173243716 pf159380173243717" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf15937780205493" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15937780205492" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="dashboard.xhtml" x="338" y="562" id="pf15937834078791" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15937834078790" path="dashboard.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/usuario/consUsuario.xhtml" x="338" y="946" id="pf15937898599474" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15937898599472" path="/pages/usuario/consUsuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/usuario/cadUsuario.xhtml" x="338" y="1330" id="pf15937898599475" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf15937898599473" path="/pages/usuario/cadUsuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tipoacesso/consAcesso.xhtml" x="338" y="1714" id="pf159379839781714" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf159379839781712" path="/pages/tipoacesso/consAcesso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tipoacesso/cadAcesso.xhtml" x="338" y="2098" id="pf159379839781715" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf159379839781713" path="/pages/tipoacesso/cadAcesso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/servicos/consServicos.xhtml" x="338" y="2482" id="pf159380173243718" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf159380173243716" path="/pages/servicos/consServicos.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/servicos/cadServicos.xhtml" x="338" y="2866" id="pf159380173243719" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf159380173243717" path="/pages/servicos/cadServicos.xhtml"/>
+  <links id="pf15937780205492" target="pf15937780205493" source="pf15937780205491" outcome="index" redirect="true"/>
+  <links id="pf15937834078790" target="pf15937834078791" source="pf15937780205491" outcome="dashboard" redirect="true"/>
+  <links id="pf15937898599472" target="pf15937898599474" source="pf15937780205491" outcome="consUsuario" redirect="true"/>
+  <links id="pf15937898599473" target="pf15937898599475" source="pf15937780205491" outcome="cadsUsuario" redirect="true"/>
+  <links id="pf159379839781712" target="pf159379839781714" source="pf15937780205491" outcome="consAcesso" redirect="true"/>
+  <links id="pf159379839781713" target="pf159379839781715" source="pf15937780205491" outcome="cadAcesso" redirect="true"/>
+  <links id="pf159380173243716" target="pf159380173243718" source="pf15937780205491" outcome="consServicos" redirect="true"/>
+  <links id="pf159380173243717" target="pf159380173243719" source="pf15937780205491" outcome="cadServicos" redirect="true"/>
+</pageflow:Pageflow>

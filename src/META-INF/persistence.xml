@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="sistemaWKPU" transaction-type="RESOURCE_LOCAL">
+		<class>br.com.sistemaWK.model.Acesso</class>
+		<class>br.com.sistemaWK.model.Tipoacesso</class>
+		<class>br.com.sistemaWK.model.Usuario</class>
+		<class>br.com.sistemaWK.model.Professores</class>
+		<class>br.com.sistemaWK.model.Servicos</class>
+		<class>br.com.sistemaWK.model.Alunos</class>
+		<class>br.com.sistemaWK.model.Vendas</class>
+		<class>br.com.sistemaWK.model.Vendascomissao</class>
+		<class>br.com.sistemaWK.model.Contasreceber</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wktechnology?useTimezone=true&amp;serverTimezone=UTC&amp;sessionVariables=transaction_isolation='READ-COMMITTED'"/>
+			<property name="javax.persistence.jdbc.user" value="local"/>
+			<property name="javax.persistence.jdbc.password" value="780920**"/>
+		</properties>
+	</persistence-unit>
+</persistence>

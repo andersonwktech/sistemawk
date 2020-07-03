@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<br />
+		<h:form id="frmConsultaservicos">
+			<h4>Consulta de Serviços</h4>
+			<hr />
+			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+			<div align="right">
+				<p:commandLink  ajax="false" 
+				styleClass="btn btn-dark" value="Novo" action="#{servicosMB.novo()}" />
+			</div>
+			<p:dataTable id="idTabelaservicos" var="servicos"
+				value="#{servicosMB.listaServicos}" style="border:none;"
+				class="tabelacontas" scrollRows="10" scrollable="true"
+				scrollHeight="300" selectionMode="single"
+				rowKey="#{servicos.idservicos}">
+
+
+				<p:column headerText="Nome" sortBy="#{servicos.nomeservicos}"
+					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{servicos.nomeservicos}" />
+				</p:column>
+				<p:column headerText="Carga Horaria" sortBy="#{servicos.cargahoraria}"
+					style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{servicos.cargahoraria}" />
+				</p:column>
+				<p:column headerText="Valor" sortBy="#{servicos.valor}"
+					style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{servicos.valor}" >
+						<f:convertNumber pattern="##,###,###,###.##"
+											minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText=""
+					style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<p:commandLink ajax="false" action="#{servicosMB.editar(servicos)}"
+						style="text-align: left;color:black;">
+						<span data-feather="edit"></span>
+					</p:commandLink>
+					<p:commandLink ajax="false" action="#{servicosMB.ativarDesativarServicos(servicos)}"  update=":frmConsultaservicos:growl, idTabelaservicos" 
+						style="text-align: left;color:black;">
+						<span data-feather="#{servicos.descricaoativo}"></span>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

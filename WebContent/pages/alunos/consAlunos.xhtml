@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<br />
+		<h:form id="frmConsultaalunos">
+			<h4>Consulta de Alunos</h4>
+			<hr />
+			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+			<div align="right">
+				<p:commandLink  ajax="false" 
+				styleClass="btn btn-dark" value="Novo" action="#{alunosMB.novo()}" />
+			</div>
+			<p:dataTable id="idTabelaalunos" var="alunos"
+				value="#{alunosMB.listaAlunos}" style="border:none;"
+				class="tabelacontas" scrollRows="10" scrollable="true"
+				scrollHeight="300" selectionMode="single"
+				rowKey="#{alunos.idalunos}">
+ 
+
+				<p:column headerText="Nome" sortBy="#{alunos.nome}"
+					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{alunos.nome}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{alunos.email}"
+					style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{alunos.email}" />
+				</p:column>
+				<p:column headerText="Telefone" sortBy="#{alunos.telefonecelular}"
+					style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{alunos.telefonecelular}" >
+					</h:outputText>
+				</p:column>
+				<p:column headerText=""
+					style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<p:commandLink ajax="false" action="#{alunosMB.editar(alunos)}"
+						style="text-align: left;color:black;">
+						<span data-feather="edit"></span>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

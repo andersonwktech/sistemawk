@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<br />
+		<h:form id="frmConsultaprofessores">
+			<h4>Consulta de Professores</h4>
+			<hr />
+			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+			<div align="right">
+				<p:commandLink  ajax="false" 
+				styleClass="btn btn-dark" value="Novo" action="#{professoresMB.novo()}" />
+			</div>
+			<p:dataTable id="idTabelaprofessores" var="professores"
+				value="#{professoresMB.listaProfessores}" style="border:none;"
+				class="tabelacontas" scrollRows="10" scrollable="true"
+				scrollHeight="300" selectionMode="single"
+				rowKey="#{professores.idprofessores}">
+
+
+				<p:column headerText="Nome" sortBy="#{professores.nome}"
+					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{professores.nome}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{professores.email}"
+					style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{professores.email}" />
+				</p:column>
+				<p:column headerText="Telefone" sortBy="#{professores.telefone}"
+					style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{professores.telefone}" />
+				</p:column>
+				<p:column headerText=""
+					style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<p:commandLink ajax="false" action="#{professoresMB.editar(professores)}"
+						style="text-align: left;color:black;">
+						<span data-feather="edit"></span>
+					</p:commandLink>
+					<p:commandLink ajax="false" action="#{professoresMB.ativarDesativarProfessores(professores)}"  update=":frmConsultaprofessores:growl, idTabelaprofessores" 
+						style="text-align: left;color:black;">
+						<span data-feather="#{professores.descricaoativo}"></span>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

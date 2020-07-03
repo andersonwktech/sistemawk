@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<h:form id="frmCadastroUsuario" acceptcharset="ISO-8859-1">
+
+			<h4>Cadastro de Alunos</h4>
+			<hr />
+			<br />
+			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Nome</label>
+					<h:inputText value="#{cadAlunosMB.alunos.nome}"
+						class="form-control" placeholder="Email" />
+				</div>
+				<div class="form-group col-md-6">
+					<label>E-mail</label>
+					<h:inputText value="#{cadAlunosMB.alunos.email}"
+						class="form-control" placeholder="Email" />
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label>Telefone Celular</label>
+					<p:inputMask mask="(99) 99999-9999" value="#{cadAlunosMB.alunos.telefonecelular}" style="border:0px;font-size:12px;"
+						class="form-control" id="telefoneCelular" />
+				</div>
+			</div>
+			<br />
+
+			<h6>Endereço</h6>
+			<hr />
+			<h:panelGroup id="infCep">
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="inputCEP">CEP</label>
+
+						<h:panelGrid columns="2" style="width:100%;">
+							<h:inputText value="#{cadAlunosMB.alunos.cep}"
+								class="form-control" id="inputCEP" placeholder="CEP" />
+							<p:commandLink id="btnConfirmar" value="Buscar"
+								update="inputTipoLogradouro, inputlogradouro, inputNumero,
+							 inputComplemento, inputBairro, inputUfEstado, infCep"
+								action="#{cadAlunosMB.buscarendereco()}" ajax="false"
+								styleClass="btn btn-dark" />
+						</h:panelGrid>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputTipoLogradouro">Tipo Logradouro</label>
+						<h:inputText value="#{cadAlunosMB.alunos.tipologradouro}"
+							class="form-control" id="inputTipoLogradouro"
+							placeholder="Tipo Logradouro" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputlogradouro">Logradouro</label>
+						<h:inputText value="#{cadAlunosMB.alunos.logradouro}"
+							class="form-control" id="inputlogradouro"
+							placeholder="Logradouro" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputNumero">Número</label>
+						<h:inputText value="#{cadAlunosMB.alunos.numero}"
+							class="form-control" id="inputNumero" placeholder="Número" />
+					</div>
+				</div>
+
+
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="inputComplemento">Complemento</label>
+						<h:inputText value="#{cadAlunosMB.alunos.complemento}"
+							class="form-control" id="inputComplemento" placeholder="CEP" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputBairro">Bairro</label>
+						<h:inputText value="#{cadAlunosMB.alunos.bairro}"
+							class="form-control" id="inputBairro" placeholder="Bairro" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputCidade">Cidade</label>
+						<h:inputText value="#{cadAlunosMB.alunos.cidade}"
+							class="form-control" id="inputCidade" placeholder="Cidade" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inputUfEstado">UF - Estado</label>
+						<h:inputText value="#{cadAlunosMB.alunos.estado}"
+							class="form-control" id="inputUfEstado" placeholder="UF Estado" />
+					</div>
+				</div>
+			</h:panelGroup>
+			<br />
+
+			<br />
+			<hr />
+			<div align="center">
+ 
+				<p:commandLink ajax="false" update="growl"
+					styleClass="btn btn-success" value="Confirmar"
+					action="#{cadAlunosMB.salvar()}" />
+
+				<p:commandLink ajax="false" styleClass="btn btn-danger"
+					style="margin-left:1%;" value="Cancelar"
+					action="#{cadAlunosMB.cancelar()}" />
+
+			</div>
+			<br />
+		</h:form>
+		<script>
+		$(document).ready(function(){
+			$(function(){
+				$("#telefonecelular").mask("(99) 99999-9999");
+			});
+		});
+		</script>
+	</ui:define>
+</ui:composition>
+</html>
