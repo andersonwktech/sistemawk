@@ -23,4 +23,9 @@ private AlunosDao AlunosDao;
 		AlunosDao = new AlunosDao();
 		return AlunosDao.lista(sql);
 	}
+	
+	public Alunos consultarCPF(String cpfAluno) {
+		AlunosDao = new AlunosDao();
+		return AlunosDao.consultarCPF(cpfAluno);
+	}
 }

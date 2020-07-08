@@ -6,57 +6,57 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.sistemaWK.model.Contasreceber;
+import br.com.sistemaWK.model.Formaspagamento;
 import br.com.sistemaWK.util.ConectionFactory;
 
-public class ContasReceberDao {
+public class FormasPagamentoDao {
 
-	public Contasreceber salvar(Contasreceber Contasreceber) {
+	
+	public Formaspagamento salvar(Formaspagamento formaspagamento) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-		Contasreceber = manager.merge(Contasreceber);
+		formaspagamento = manager.merge(formaspagamento);
 		tx.commit();
 		manager.close();
-		return Contasreceber;
+		return formaspagamento;
 	}
 
-	public Contasreceber consultar(int idContasreceber) {
+	public Formaspagamento consultar(int idformaspagamento) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-		Query q = manager.createQuery("select c from Contasreceber c where c.idcontasreceber=" + idContasreceber);
-		Contasreceber Contasreceber = null;
+		Query q = manager.createQuery("select f from Formaspagamento f where f.idformaspagamento=" + idformaspagamento);
+		Formaspagamento formaspagamento = null;
 		if (q.getResultList().size() > 0) {
-			Contasreceber = (Contasreceber) q.getResultList().get(0);
+			formaspagamento = (Formaspagamento) q.getResultList().get(0);
 		}
 		tx.commit();
 		manager.close();
-		return Contasreceber;
+		return formaspagamento;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Contasreceber> lista(String sql) {
+	public List<Formaspagamento> lista(String sql) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		Query q = manager.createQuery(sql);
-		List<Contasreceber> lista = q.getResultList();
+		List<Formaspagamento> lista = q.getResultList();
 		manager.close();
 		return lista;
 	}
 	
-	
-	public void excluir(int idcontasreceber) {
+	public void excluir(int idformaspagamento) {
     	EntityManager manager;
     	manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-        Query q = manager.createQuery("Select c from Contasreceber c where c.idcontasreceber=" + idcontasreceber);
+        Query q = manager.createQuery("Select f from Formaspagamento f where f.idformaspagamento=" + idformaspagamento);
         if (q.getResultList().size()>0){
-        	Contasreceber contasreceber = (Contasreceber) q.getResultList().get(0);
-            manager.remove(contasreceber);
+        	Formaspagamento formaspagamento = (Formaspagamento) q.getResultList().get(0);
+            manager.remove(formaspagamento);
         }
         tx.commit();
         manager.close();

@@ -23,4 +23,10 @@ private ContasReceberDao ContasReceberDao;
 		ContasReceberDao = new ContasReceberDao();
 		return ContasReceberDao.lista(sql);
 	}
+	
+	
+	public void excluir(int idContasreceber) {
+		ContasReceberDao = new ContasReceberDao();
+		ContasReceberDao.excluir(idContasreceber);
+	}
 }

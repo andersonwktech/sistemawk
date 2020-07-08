@@ -35,10 +35,10 @@ public class Vendas implements Serializable{
 	private String status;
 	@Column(name = "observacao")
 	private String observacao;
-	@Column(name = "formapagamento")
-	private String formapagamento;
 	@Column(name = "valorvenda")
 	private float valorvenda;
+	@Column(name = "corstatus")
+	private String corstatus;
 	@JoinColumn(name = "alunos_idalunos", referencedColumnName = "idalunos")
 	@ManyToOne(optional = false)
 	private Alunos alunos;
@@ -105,18 +105,6 @@ public class Vendas implements Serializable{
 
 
 
-	public String getFormapagamento() {
-		return formapagamento;
-	}
-
-
-
-	public void setFormapagamento(String formapagamento) {
-		this.formapagamento = formapagamento;
-	}
-
-
-
 	public float getValorvenda() {
 		return valorvenda;
 	}
@@ -161,6 +149,18 @@ public class Vendas implements Serializable{
 
 	public void setServicos(Servicos servicos) {
 		this.servicos = servicos;
+	}
+
+
+
+	public String getCorstatus() {
+		return corstatus;
+	}
+
+
+
+	public void setCorstatus(String corstatus) {
+		this.corstatus = corstatus;
 	}
 
 

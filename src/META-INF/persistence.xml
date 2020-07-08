@@ -10,6 +10,7 @@
 		<class>br.com.sistemaWK.model.Vendas</class>
 		<class>br.com.sistemaWK.model.Vendascomissao</class>
 		<class>br.com.sistemaWK.model.Contasreceber</class>
+		<class>br.com.sistemaWK.model.Formaspagamento</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wktechnology?useTimezone=true&amp;serverTimezone=UTC&amp;sessionVariables=transaction_isolation='READ-COMMITTED'"/>

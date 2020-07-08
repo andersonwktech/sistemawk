@@ -45,6 +45,8 @@ public class Alunos implements Serializable{
 	private String cep;
 	@Column(name = "complemento")
 	private String complemento;
+	@Column(name = "cpf")
+	private String cpf;
 	
 	
 	
@@ -194,6 +196,18 @@ public class Alunos implements Serializable{
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 

@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
-	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap">
+	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap" style="z-index: 1000;">
 		<img src="../../resources/img/logoWK.png" width="7%;"
 			style="margin-left: 1%;" /> <b class="text-light"><p:outputLabel
 				value="Bem Vindo, #{usuarioLogadoMB.nomeUsuario}" /></b>
@@ -23,9 +23,9 @@
 				<div class="sidebar-sticky">
 
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active" href="/sistemaWK/dashboard.jsf">
-								<span data-feather="home"></span> Dashboard <span
-								class="sr-only">(atual)</span>
+						<li class="nav-item"><a class="nav-link active"
+							href="/sistemaWK/dashboard.jsf"> <span data-feather="home"></span>
+								Dashboard <span class="sr-only">(atual)</span>
 						</a></li>
 						<h:panelGroup
 							rendered="#{usuarioLogadoMB.usuario.tipoacesso.acesso.cadastro}">
@@ -70,18 +70,18 @@
 											<span data-feather="file-text"></span> Contas a Receber
 									</a></li>
 								</ul></li>
-							<li class="nav-item, dropdown"><a class="nav-link" href="#"
-								data-toggle="dropdown" role="button" aria-haspopup="true"
-								aria-expanded="false"> <span data-feather="file-plus"
-									class="text-light"></span> <b class="text-light">Vendas</b>
-							</a>
-								<ul class="dropdown-menu">
-									<li style="font-size: 12px;"><a class="nav-link"
-										href="/sistemaWK/pages/revisaovidas/inicioInscricaoRv.jsf">
-											<span data-feather="file-text"></span> Cursos
-									</a></li>
-								</ul></li>
 						</h:panelGroup>
+						<li class="nav-item, dropdown"><a class="nav-link" href="#"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> <span data-feather="file-plus"
+								class="text-light"></span> <b class="text-light">Vendas</b>
+						</a>
+							<ul class="dropdown-menu">
+								<li style="font-size: 12px;"><a class="nav-link"
+									href="/sistemaWK/pages/vendas/consVendas.jsf">
+										<span data-feather="file-text"></span> Lançamentos
+								</a></li>
+							</ul></li>
 						<li class="nav-item"><a class="nav-link"
 							href="/sistemaWK/pages/usuario/alterarSenha.jsf" role="button"
 							aria-haspopup="true" aria-expanded="false"> <span
