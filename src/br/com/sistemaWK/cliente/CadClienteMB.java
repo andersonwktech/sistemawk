@@ -1,4 +1,4 @@
-package br.com.sistemaWK.alunos;
+package br.com.sistemaWK.cliente;
 
 import java.io.Serializable;
 
@@ -11,18 +11,18 @@ import javax.servlet.http.HttpSession;
 import br.com.sistemaWK.util.ControladorCEPBean;
 import br.com.sistemaWK.util.EnderecoBean;
 import br.com.sistemaWK.util.Mensagem;
-import br.com.sistemaWK.facade.AlunosFacade;
-import br.com.sistemaWK.model.Alunos;
+import br.com.sistemaWK.facade.ClienteFacade;
+import br.com.sistemaWK.model.Cliente;
 
 @Named
 @ViewScoped
-public class CadAlunosMB implements Serializable{
+public class CadClienteMB implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Alunos alunos;
+	private Cliente cliente;
 	
 	
 	
@@ -30,23 +30,23 @@ public class CadAlunosMB implements Serializable{
 	public void init() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		alunos = (Alunos) session.getAttribute("alunos");
-		session.removeAttribute("alunos");
-		if (alunos == null) {
-			alunos = new Alunos();
+		cliente = (Cliente) session.getAttribute("cliente");
+		session.removeAttribute("cliente");
+		if (cliente == null) {
+			cliente = new Cliente();
 		}
 	}
 
 
 
-	public Alunos getAlunos() {
-		return alunos;
+	public Cliente getcliente() {
+		return cliente;
 	}
 
 
 
-	public void setAlunos(Alunos alunos) {
-		this.alunos = alunos;
+	public void setcliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	
@@ -54,13 +54,13 @@ public class CadAlunosMB implements Serializable{
 	
 	public void buscarendereco() {
 		ControladorCEPBean cep = new ControladorCEPBean();
-		cep.setCep(alunos.getCep());
+		cep.setCep(cliente.getCep());
 		EnderecoBean endereco = cep.carregarEndereco();
 		if (endereco.getLogradouro() != null) {
-			alunos.setBairro(endereco.getBairro());
-			alunos.setEstado(endereco.getUf());
-			alunos.setCidade(endereco.getLocalidade());
-			alunos.setComplemento(endereco.getComplemento());
+			cliente.setBairro(endereco.getBairro());
+			cliente.setEstado(endereco.getUf());
+			cliente.setCidade(endereco.getLocalidade());
+			cliente.setComplemento(endereco.getComplemento());
 			String logradouro = endereco.getLogradouro().substring(endereco.getLogradouro().indexOf(" "),
 					endereco.getLogradouro().length());
 			int posicao = endereco.getLogradouro().length();
@@ -68,30 +68,30 @@ public class CadAlunosMB implements Serializable{
 				posicao = posicao - 1;
 			}
 			String tipo = endereco.getLogradouro().substring(0, posicao + 1);
-			alunos.setLogradouro(logradouro);
-			alunos.setTipologradouro(tipo);
+			cliente.setLogradouro(logradouro);
+			cliente.setTipologradouro(tipo);
 		}
 	}
 	
 	
 	
 	public String cancelar() {
-		return "consAlunos";
+		return "consCliente";
 	}
 	
 	
 	public String salvar() {
 		if (validarDados()) {
-			AlunosFacade alunosFacade = new AlunosFacade();
-			alunosFacade.salvar(alunos);
-			return "consAlunos";
+			ClienteFacade clienteFacade = new ClienteFacade();
+			clienteFacade.salvar(cliente);
+			return "consCliente";
 		}
 		return "";
 	}
 	
 	
 	public boolean validarDados() {
-		if (alunos.getNome() == null || alunos.getNome().length() <= 0) {
+		if (cliente.getNome() == null || cliente.getNome().length() <= 0) {
 			Mensagem.lancarMensagemInfo("Atenção", "Informe seu nome");
 			return false;
 		}

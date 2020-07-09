@@ -25,12 +25,14 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-3">
-					<label for="inputCpf">CPF</label>
+					<label for="inputCpf">Contratante</label>
 					<h:panelGrid columns="2" style="width:100%;">
-						<p:inputMask mask="999.999.999-99" value="#{cadVendasMB.cpfAluno}"
-							style="border:0px;font-size:14px;" class="form-control" id="cpf" />
-						<p:commandLink id="btnalunos" value="Buscar"
-							action="#{cadVendasMB.buscarAluno()}" styleClass="btn btn-dark"
+						<p:inputMask mask="999.999.999-99"
+							value="#{cadVendasMB.cpfContratante}"
+							style="border:0px;font-size:14px;" class="form-control"
+							id="cpfContratante" />
+						<p:commandLink id="btncliente" value="Buscar" action="#"
+							styleClass="btn btn-dark"
 							update="infAluno, infEnderecoAluno, panelCep">
 						</p:commandLink>
 					</h:panelGrid>
@@ -39,20 +41,35 @@
 
 			<h:panelGroup id="infAluno" style="width:100%;">
 				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="inputCpf">CPF</label>
+						<h:panelGrid columns="2" style="width:100%;">
+							<p:inputMask mask="999.999.999-99"
+								value="#{cadVendasMB.cpfCliente}"
+								style="border:0px;font-size:14px;" class="form-control" id="cpf" />
+							<p:commandLink id="btncliente" value="Buscar"
+								action="#{cadVendasMB.buscarCliente()}"
+								styleClass="btn btn-dark"
+								update="infAluno, infEnderecoAluno, panelCep">
+							</p:commandLink>
+						</h:panelGrid>
+					</div>
 					<div class="form-group col-md-6">
 						<label for="inputNome">Nome</label>
-						<h:inputText value="#{cadVendasMB.alunos.nome}"
+						<h:inputText value="#{cadVendasMB.cliente.nome}"
 							class="form-control" id="inputNome" placeholder="Nome" />
 					</div>
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-3">
 						<label for="inputRG">Email</label>
-						<h:inputText value="#{cadVendasMB.alunos.email}"
+						<h:inputText value="#{cadVendasMB.cliente.email}"
 							class="form-control" id="inputRG" placeholder="RG" />
 					</div>
+				</div>
+				<div class="form-row">
 					<div class="form-group col-md-2">
 						<label for="dataNasc">Telefone Celular</label>
-						<h:inputText class="form-control" id="dataNasc"
-							value="#{cadVendasMB.alunos.telefonecelular}">
+						<h:inputText class="form-control"
+							value="#{cadVendasMB.cliente.telefonecelular}">
 						</h:inputText>
 					</div>
 				</div>
@@ -82,24 +99,24 @@
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="inputTipoLogradouro">Tipo Logradouro</label>
-						<h:inputText value="#{cadVendasMB.alunos.tipologradouro}"
+						<h:inputText value="#{cadVendasMB.cliente.tipologradouro}"
 							class="form-control" id="inputTipoLogradouro"
 							placeholder="Tipo Logradouro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputlogradouro">Logradouro</label>
-						<h:inputText value="#{cadVendasMB.alunos.logradouro}"
+						<h:inputText value="#{cadVendasMB.cliente.logradouro}"
 							class="form-control" id="inputlogradouro"
 							placeholder="Logradouro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputNumero">Número</label>
-						<h:inputText value="#{cadVendasMB.alunos.numero}"
+						<h:inputText value="#{cadVendasMB.cliente.numero}"
 							class="form-control" id="inputNumero" placeholder="Número" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputComplemento">Complemento</label>
-						<h:inputText value="#{cadVendasMB.alunos.complemento}"
+						<h:inputText value="#{cadVendasMB.cliente.complemento}"
 							class="form-control" id="inputComplemento" placeholder="CEP" />
 					</div>
 				</div>
@@ -107,28 +124,50 @@
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="inputBairro">Bairro</label>
-						<h:inputText value="#{cadVendasMB.alunos.bairro}"
+						<h:inputText value="#{cadVendasMB.cliente.bairro}"
 							class="form-control" id="inputBairro" placeholder="Bairro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputCidade">Cidade</label>
-						<h:inputText value="#{cadVendasMB.alunos.cidade}"
+						<h:inputText value="#{cadVendasMB.cliente.cidade}"
 							class="form-control" id="inputCidade" placeholder="Cidade" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputUfEstado">UF - Estado</label>
-						<h:inputText value="#{cadVendasMB.alunos.estado}"
+						<h:inputText value="#{cadVendasMB.cliente.estado}"
 							class="form-control" id="inputUfEstado" placeholder="UF Estado" />
 					</div>
 				</div>
 			</h:panelGroup>
 			<br />
 			<br />
-			<h6>Produtos</h6>
+			<h6>Serviços</h6>
 			<hr />
 			<div class="form-row">
-				<div class="form-group col-md-9">
-					<label>Produtos*</label>
+				<div class="form-group col-md-3">
+					<label>Tipo de Serviço*</label>
+					<h:panelGrid columns="2" style="width:100%;">
+						<h:selectOneMenu id="exampleTipoServicos" style="width: 100%;"
+							immediate="true" value="#{cadVendasMB.tiposervicos}"
+							converter="ServicosConverter" styleClass="form-control">
+							<f:selectItem itemLabel="Selecione" itemValue="0"
+								noSelectionOption="true" />
+							<f:selectItems value="#{cadVendasMB.listaTipoServicos}"
+								var="servicosSelecionado"
+								itemLabel="#{servicosSelecionado.descricao}"
+								itemValue="#{servicosSelecionado}" />
+							<f:attribute name="listaServicos"
+								value="#{cadVendasMB.listaTipoServicos}" />
+						</h:selectOneMenu>
+						<p:commandLink id="btnAdicionar" value="Adicionar"
+							action="#" style="margin-left:2%;"
+							update="infProdutos, valorServico, idTabelaPagamentos, panelValorRestante"
+							styleClass="btn btn-dark">
+						</p:commandLink>
+					</h:panelGrid>
+				</div>
+				<div class="form-group col-md-6">
+					<label>Serviços*</label>
 					<h:panelGrid columns="2" style="width:100%;">
 						<h:selectOneMenu id="exampleProdutos" style="width: 100%;"
 							immediate="true" value="#{cadVendasMB.servicos}"
@@ -160,30 +199,15 @@
 			<h:panelGroup id="infProdutos">
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label>Carga Horária</label>
-						<h:inputText value="#{cadVendasMB.cargahoraria}"
-							id="cargaHorariaServico" class="form-control" />
-					</div>
-					<div class="form-group col-md-6">
-						<label>Professor</label>
-						<h:selectOneMenu id="exampleProfessores" style="width: 100%;"
-							immediate="true" value="#{cadVendasMB.professores}"
-							converter="ProfessoresConverter" styleClass="form-control">
-							<f:selectItem itemLabel="Selecione" itemValue="0"
-								noSelectionOption="true" />
-							<f:selectItems value="#{cadVendasMB.listaProfessores}"
-								var="professoresSelecionado"
-								itemLabel="#{professoresSelecionado.nome}"
-								itemValue="#{professoresSelecionado}" />
-							<f:attribute name="listaProfessores"
-								value="#{cadVendasMB.listaProfessores}" />
-						</h:selectOneMenu>
+						<label>Consultor</label>
+						<h:inputText value="#{cadVendasMB.nomeConsultor}" readonly="true"
+							id="consultor" class="form-control" />
 					</div>
 				</div>
 			</h:panelGroup>
 			<br />
 
-			<h6>Listagem do Orçamento</h6>
+			<h6>Lista de Serviços</h6>
 			<hr />
 			<h:panelGroup id="panelAdicionarPagamento">
 				<div class="form-row">
@@ -196,7 +220,8 @@
 					<div class="form-group col-md-3">
 						<label>Valor R$</label>
 						<h:inputText value="#{cadVendasMB.valorFormaPagamento}"
-							id="valorOrcamento" class="form-control" style="text-align:right;">
+							id="valorOrcamento" class="form-control"
+							style="text-align:right;">
 							<f:convertNumber pattern="##,###,###,###.##"
 								minFractionDigits="2" />
 						</h:inputText>
@@ -294,8 +319,8 @@
 					<div class="form-group col-md-3">
 						<label>Valor da Parcela R$</label>
 						<h:inputText value="#{cadVendasMB.contasreceber.valorparcela}"
-							id="valorParcelaPagamento" class="form-control"
-							readonly="true" style="text-align:right;">
+							id="valorParcelaPagamento" class="form-control" readonly="true"
+							style="text-align:right;">
 							<f:convertNumber pattern="##,###,###,###.##"
 								minFractionDigits="2" />
 						</h:inputText>

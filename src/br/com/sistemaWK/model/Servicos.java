@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +35,12 @@ public class Servicos implements Serializable{
 	private boolean ativo;
 	@Column(name = "descricaoativo")
 	private String descricaoativo;
+	@JoinColumn(name = "tiposervicos_idtiposervicos", referencedColumnName = "idtiposervicos")
+	@ManyToOne(optional = false)
+	private Tiposervicos tiposervicos;
+	@JoinColumn(name = "consultores_idconsultores", referencedColumnName = "idconsultores")
+	@ManyToOne(optional = false)
+	private Consultores consultores;
 	
 	
 	
@@ -142,6 +150,46 @@ public class Servicos implements Serializable{
 
 	public void setDescricaoativo(String descricaoativo) {
 		this.descricaoativo = descricaoativo;
+	}
+
+
+
+
+
+
+
+	public Tiposervicos getTiposervicos() {
+		return tiposervicos;
+	}
+
+
+
+
+
+
+
+	public void setTiposervicos(Tiposervicos tiposervicos) {
+		this.tiposervicos = tiposervicos;
+	}
+
+
+
+
+
+
+
+	public Consultores getConsultores() {
+		return consultores;
+	}
+
+
+
+
+
+
+
+	public void setConsultores(Consultores consultores) {
+		this.consultores = consultores;
 	}
 
 

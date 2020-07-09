@@ -32,9 +32,14 @@
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
-				<p:column headerText="Aluno" 
-					style="width:28%; font-size:12px; background:white; color:black; border:none;text-align:left;">
-					<h:outputText value="#{vendas.alunos.nome}" />
+				<p:column headerText="Contratante" 
+					style="width:18%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{vendas.contratante.cpfcnpj}" />
+				</p:column>
+				<p:column headerText="Tipo Serviço"
+					
+					style="width:36%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					<h:outputText value="#{vendas.servicos.tiposervicos.descricao}" />
 				</p:column>
 				<p:column headerText="Serviço"
 					

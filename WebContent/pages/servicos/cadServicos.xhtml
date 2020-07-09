@@ -12,43 +12,70 @@
 			<div id="tudo">
 				<div style="display: block; padding: 4.1em;">
 
-					<h4>Cadastro Professores</h4>
+					<h4>Cadastro de Consultor</h4>
 					<hr />
 					<br />
 					<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Tipo de Serviços</label>
+							<h:selectOneMenu id="exampleTipoServicos" style="width: 100%;"
+								immediate="true" value="#{cadServicosMB.tiposervicos}"
+								converter="TipoServicosConverter" styleClass="form-control">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{cadServicosMB.listaTipoServicos}"
+									var="tipoServicosSelecionado"
+									itemLabel="#{tipoServicosSelecionado.descricao}"
+									itemValue="#{tipoServicosSelecionado}" />
+								<f:attribute name="listaTipoServicos"
+									value="#{cadServicosMB.listaTipoServicos}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Consultores</label> 
+							<h:selectOneMenu id="exampleConsultor" style="width: 100%;"
+								immediate="true" value="#{cadServicosMB.consultores}"
+								converter="ConsultoresConverter" styleClass="form-control">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{cadServicosMB.listaConsultores}"
+									var="consultoresSelecionado"
+									itemLabel="#{consultoresSelecionado.nome}"
+									itemValue="#{consultoresSelecionado}" />
+								<f:attribute name="listaConsultores"
+									value="#{cadServicosMB.listaConsultores}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Nome do Serviço</label>
 							<h:inputText value="#{cadServicosMB.servicos.nomeservicos}"
 								class="form-control" placeholder="Email" />
 						</div>
-						<div class="form-group col-md-6">
-							<label>Carga Horaria</label>
-							<h:inputText value="#{cadServicosMB.servicos.cargahoraria}"
-								class="form-control" placeholder="Email" />
-						</div>
-					</div>
-					<div class="form-row">
 						<div class="form-group col-md-3">
 							<label>Valor</label>
 							<h:inputText value="#{cadServicosMB.servicos.valor}"
-								class="form-control" placeholder="Email" >
+								class="form-control" style="text-align:right;">
 								<f:convertNumber pattern="##,###,###,###.##"
-											minFractionDigits="2" />
+									minFractionDigits="2" />
 							</h:inputText>
 						</div>
 					</div>
-					
+
 					<br />
 					<hr />
 					<div align="center">
 
-						<p:commandLink ajax="false" update="growl" 
+						<p:commandLink ajax="false" update="growl"
 							styleClass="btn btn-success" value="Confirmar"
 							action="#{cadServicosMB.salvar()}" />
 
-						<p:commandLink ajax="false" styleClass="btn btn-danger" style="margin-left:1%;"
-							value="Cancelar" action="#{cadServicosMB.cancelar()}" />
+						<p:commandLink ajax="false" styleClass="btn btn-danger"
+							style="margin-left:1%;" value="Cancelar"
+							action="#{cadServicosMB.cancelar()}" />
 
 					</div>
 				</div>

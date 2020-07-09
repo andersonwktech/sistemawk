@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15937779944170" configfile="/sistemaWK/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1906" id="pf15937780205491" referenceLink="//@navigationRule.12/@fromViewId|" outlinks="pf15937780205492 pf15937834078790 pf15937898599472 pf15937898599473 pf159379839781712 pf159379839781713 pf159380173243716 pf159380173243717 pf15940573874890 pf15940573874891 pf15940573874892 pf15940574006826 pf15942178773421" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1906" id="pf15937780205491" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf15937780205492 pf15937834078790 pf15937898599472 pf15937898599473 pf159379839781712 pf159379839781713 pf159380173243716 pf159380173243717 pf15940573874892 pf15940574006826 pf15942178773421 pf15943186400720 pf15943186659772 pf15943188075114 pf15943188075115" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf15937780205493" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15937780205492" path="index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="dashboard.xhtml" x="338" y="562" id="pf15937834078791" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15937834078790" path="dashboard.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/usuario/consUsuario.xhtml" x="338" y="946" id="pf15937898599474" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15937898599472" path="/pages/usuario/consUsuario.xhtml"/>
@@ -9,11 +9,13 @@
   <nodes xsi:type="pageflow:PFPage" name="pages/tipoacesso/cadAcesso.xhtml" x="338" y="2098" id="pf159379839781715" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf159379839781713" path="/pages/tipoacesso/cadAcesso.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/servicos/consServicos.xhtml" x="338" y="2482" id="pf159380173243718" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf159380173243716" path="/pages/servicos/consServicos.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/servicos/cadServicos.xhtml" x="338" y="2866" id="pf159380173243719" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf159380173243717" path="/pages/servicos/cadServicos.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/alunos/consAlunos.xhtml" x="338" y="3250" id="pf15940573874893" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf15940573874890" path="/pages/alunos/consAlunos.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/alunos/cadAlunos.xhtml" x="338" y="3634" id="pf15940573874894" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf15940573874891" path="/pages/alunos/cadAlunos.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/vendas/consVendas.xhtml" id="pf15940573874905" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf15940573874892" path="/pages/vendas/consVendas.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/vendas/cadVendas.xhtml" id="pf15940574006837" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" inlinks="pf15940574006826" path="/pages/vendas/cadVendas.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/vendas/consContasReceber.xhtml" id="pf15942178773432" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" inlinks="pf15942178773421" path="/pages/vendas/consContasReceber.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/vendas/cadVendas.xhtml" id="pf15940574006837" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" inlinks="pf15940574006826" path="/pages/vendas/cadVendas.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/vendas/consContasReceber.xhtml" id="pf15942178773432" referenceLink="//@navigationRule.13/@navigationCase.0/@toViewId|" inlinks="pf15942178773421" path="/pages/vendas/consContasReceber.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/consultores/consConsultores.xhtml" id="pf15943186400741" referenceLink="//@navigationRule.14/@navigationCase.0/@toViewId|" inlinks="pf15943186400720" path="/pages/consultores/consConsultores.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/consultores/cadConsultores.xhtml" id="pf15943186659773" referenceLink="//@navigationRule.14/@navigationCase.0/@toViewId|" inlinks="pf15943186659772" path="/pages/consultores/cadConsultores.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cliente/consCliente.xhtml" id="pf15943188075126" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf15943188075114" path="/pages/cliente/consCliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cliente/cadCliente.xhtml" id="pf15943188075127" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf15943188075115" path="/pages/cliente/cadCliente.xhtml"/>
   <links id="pf15937780205492" target="pf15937780205493" source="pf15937780205491" outcome="index" redirect="true"/>
   <links id="pf15937834078790" target="pf15937834078791" source="pf15937780205491" outcome="dashboard" redirect="true"/>
   <links id="pf15937898599472" target="pf15937898599474" source="pf15937780205491" outcome="consUsuario" redirect="true"/>
@@ -22,9 +24,11 @@
   <links id="pf159379839781713" target="pf159379839781715" source="pf15937780205491" outcome="cadAcesso" redirect="true"/>
   <links id="pf159380173243716" target="pf159380173243718" source="pf15937780205491" outcome="consServicos" redirect="true"/>
   <links id="pf159380173243717" target="pf159380173243719" source="pf15937780205491" outcome="cadServicos" redirect="true"/>
-  <links id="pf15940573874890" target="pf15940573874893" source="pf15937780205491" outcome="consAlunos" redirect="true"/>
-  <links id="pf15940573874891" target="pf15940573874894" source="pf15937780205491" outcome="cadAlunos" redirect="true"/>
   <links id="pf15940573874892" target="pf15940573874905" source="pf15937780205491" outcome="consVendas" redirect="true"/>
   <links id="pf15940574006826" target="pf15940574006837" source="pf15937780205491" outcome="cadVendas" redirect="true"/>
   <links id="pf15942178773421" target="pf15942178773432" source="pf15937780205491" outcome="consContasReceber" redirect="true"/>
+  <links id="pf15943186400720" target="pf15943186400741" source="pf15937780205491" outcome="consConsultores" redirect="true"/>
+  <links id="pf15943186659772" target="pf15943186659773" source="pf15937780205491" outcome="cadConsultores" redirect="true"/>
+  <links id="pf15943188075114" target="pf15943188075126" source="pf15937780205491" outcome="consCliente" redirect="true"/>
+  <links id="pf15943188075115" target="pf15943188075127" source="pf15937780205491" outcome="cadCliente" redirect="true"/>
 </pageflow:Pageflow>

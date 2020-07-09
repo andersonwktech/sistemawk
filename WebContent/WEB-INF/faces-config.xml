@@ -85,8 +85,8 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>consAlunos</from-outcome>
-			<to-view-id>/pages/alunos/consAlunos.xhtml</to-view-id>
+			<from-outcome>consCliente</from-outcome>
+			<to-view-id>/pages/cliente/consCliente.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -95,8 +95,8 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>cadAlunos</from-outcome>
-			<to-view-id>/pages/alunos/cadAlunos.xhtml</to-view-id>
+			<from-outcome>cadCliente</from-outcome>
+			<to-view-id>/pages/cliente/cadCliente.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -127,6 +127,26 @@
 		<navigation-case>
 			<from-outcome>consContasReceber</from-outcome>
 			<to-view-id>/pages/vendas/consContasReceber.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consConsultores</from-outcome>
+			<to-view-id>/pages/consultores/consConsultores.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadConsultores</from-outcome>
+			<to-view-id>/pages/consultores/cadConsultores.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

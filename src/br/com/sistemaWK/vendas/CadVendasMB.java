@@ -13,17 +13,20 @@ import javax.servlet.http.HttpSession;
 
 import br.com.sistemaWK.util.ControladorCEPBean;
 import br.com.sistemaWK.util.EnderecoBean;
-import br.com.sistemaWK.facade.AlunosFacade;
+import br.com.sistemaWK.facade.ClienteFacade;
 import br.com.sistemaWK.facade.ContasReceberFacade;
 import br.com.sistemaWK.facade.FormasPagamentoFacade;
-import br.com.sistemaWK.facade.ProfessoresFacade;
+import br.com.sistemaWK.facade.ConsultoresFacade;
 import br.com.sistemaWK.facade.ServicosFacade;
+import br.com.sistemaWK.facade.TipoServicosFacade;
 import br.com.sistemaWK.facade.VendasFacade;
-import br.com.sistemaWK.model.Alunos;
+import br.com.sistemaWK.model.Cliente;
 import br.com.sistemaWK.model.Contasreceber;
+import br.com.sistemaWK.model.Contratante;
 import br.com.sistemaWK.model.Formaspagamento;
-import br.com.sistemaWK.model.Professores;
+import br.com.sistemaWK.model.Consultores;
 import br.com.sistemaWK.model.Servicos;
+import br.com.sistemaWK.model.Tiposervicos;
 import br.com.sistemaWK.model.Vendas;
 import br.com.sistemaWK.util.Mensagem;
 
@@ -36,16 +39,16 @@ public class CadVendasMB implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Vendas vendas;
-	private Alunos alunos;
+	private Cliente cliente;
 	private Formaspagamento formaspagamento;
 	private List<Formaspagamento> listaFormasPagamento;
 	private List<Contasreceber> listaContasReceber;
 	private Servicos servicos;
 	private List<Servicos> listaServicos;
 	private boolean trocarCliente = true;
-	private String cpfAluno;
-	private Professores professores;
-	private List<Professores> listaProfessores;
+	private String cpfContratante;
+	private Consultores professores;
+	private List<Consultores> listaConsultores;
 	private float valorServico;
 	private String cargahoraria;
 	private Contasreceber contasreceber;
@@ -55,6 +58,11 @@ public class CadVendasMB implements Serializable {
 	private String teste;
 	private String descricaoFormaPagamento;
 	private float valorFormaPagamento;
+	private Contratante contratante;
+	private String cpfCliente;
+	private List<Tiposervicos> listaTipoServicos;
+	private Tiposervicos tiposervicos;
+	private String nomeConsultor;
 
 	@PostConstruct
 	public void init() {
@@ -69,18 +77,16 @@ public class CadVendasMB implements Serializable {
 			vendas.setDatavenda(new Date());
 			vendas.setStatus("Não Pago");
 			vendas.setCorstatus("red");
-			alunos = new Alunos();
+			contratante = new Contratante();
 		}else {
-			alunos = vendas.getAlunos();
-			cpfAluno = alunos.getCpf();
-			this.cep = alunos.getCep();
+			contratante = vendas.getContratante();
+			cpfContratante = contratante.getCpfcnpj();
 			servicos = vendas.getServicos();
-			professores = vendas.getProfessores();
 			buscarFormasPagamento();
 			buscarContasReceber();
 			verificarValores();
 		}
-		listarServicos();
+		listarTipoServicos();
 		listarProfessores();
 	}
 
@@ -90,14 +96,6 @@ public class CadVendasMB implements Serializable {
 
 	public void setVendas(Vendas vendas) {
 		this.vendas = vendas;
-	}
-
-	public Alunos getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(Alunos alunos) {
-		this.alunos = alunos;
 	}
 
 	public Formaspagamento getFormaspagamento() {
@@ -148,28 +146,22 @@ public class CadVendasMB implements Serializable {
 		this.trocarCliente = trocarCliente;
 	}
 
-	public String getCpfAluno() {
-		return cpfAluno;
-	}
-
-	public void setCpfAluno(String cpfAluno) {
-		this.cpfAluno = cpfAluno;
-	}
-
-	public Professores getProfessores() {
+	public Consultores getProfessores() {
 		return professores;
 	}
 
-	public void setProfessores(Professores professores) {
+	public void setProfessores(Consultores professores) {
 		this.professores = professores;
 	}
 
-	public List<Professores> getListaProfessores() {
-		return listaProfessores;
+	
+
+	public List<Consultores> getListaConsultores() {
+		return listaConsultores;
 	}
 
-	public void setListaProfessores(List<Professores> listaProfessores) {
-		this.listaProfessores = listaProfessores;
+	public void setListaConsultores(List<Consultores> listaConsultores) {
+		this.listaConsultores = listaConsultores;
 	}
 
 	public float getValorServico() {
@@ -244,30 +236,88 @@ public class CadVendasMB implements Serializable {
 		this.valorFormaPagamento = valorFormaPagamento;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Contratante getContratante() {
+		return contratante;
+	}
+
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
+	}
+
+	public String getCpfContratante() {
+		return cpfContratante;
+	}
+
+	public void setCpfContratante(String cpfContratante) {
+		this.cpfContratante = cpfContratante;
+	}
+
+	public String getCpfCliente() {
+		return cpfCliente;
+	}
+
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
+	}
+
+	public List<Tiposervicos> getListaTipoServicos() {
+		return listaTipoServicos;
+	}
+
+	public void setListaTipoServicos(List<Tiposervicos> listaTipoServicos) {
+		this.listaTipoServicos = listaTipoServicos;
+	}
+
+	public Tiposervicos getTiposervicos() {
+		return tiposervicos;
+	}
+
+	public void setTiposervicos(Tiposervicos tiposervicos) {
+		this.tiposervicos = tiposervicos;
+	}
+
+	public String getNomeConsultor() {
+		return nomeConsultor;
+	}
+
+	public void setNomeConsultor(String nomeConsultor) {
+		this.nomeConsultor = nomeConsultor;
+	}
+
 	public void listarServicos() {
-		ServicosFacade servicosFacade = new ServicosFacade();
-		listaServicos = servicosFacade.listar("Select s From Servicos s");
-		if (listaServicos == null) {
-			listaServicos = new ArrayList<Servicos>();
+		if (tiposervicos != null) {
+			ServicosFacade servicosFacade = new ServicosFacade();
+			listaServicos = servicosFacade.listar("Select s From Servicos s WHERE s.tiposervicos.idtiposervicos=" + tiposervicos.getIdtiposervicos());
+			if (listaServicos == null) {
+				listaServicos = new ArrayList<Servicos>();
+			}
 		}
 	}
 
 	public void listarProfessores() {
-		ProfessoresFacade professoresFacade = new ProfessoresFacade();
-		listaProfessores = professoresFacade.listar("Select p From Professores p WHERE p.ativo=true");
-		if (listaProfessores == null) {
-			listaProfessores = new ArrayList<Professores>();
+		ConsultoresFacade consultoresFacade = new ConsultoresFacade();
+		listaConsultores = consultoresFacade.listar("Select c From Consultores c WHERE c.ativo=true");
+		if (listaConsultores == null) {
+			listaConsultores = new ArrayList<Consultores>();
 		}
 	}
 
-	public void buscarAluno() {
-		AlunosFacade alunosFacade = new AlunosFacade();
-		alunos = alunosFacade.consultarCPF(cpfAluno);
-		if (alunos == null) {
-			alunos = new Alunos();
+	public void buscarCliente() {
+		ClienteFacade clienteFacade = new ClienteFacade();
+		cliente = clienteFacade.consultarCPF(cpfCliente);
+		if (cliente == null) {
+			cliente = new Cliente();
 			Mensagem.lancarMensagemInfo("Atenção", "Aluno não encontrado \n Inseria dados do aluno manualmente!!");
 		} else { 
-			this.cep = alunos.getCep();
+			this.cep = cliente.getCep();
 			Mensagem.lancarMensagemInfo("Atenção", "Aluno encontrado!!");
 		}
 	}
@@ -306,11 +356,11 @@ public class CadVendasMB implements Serializable {
 		cep.setCep(this.cep);
 		EnderecoBean endereco = cep.carregarEndereco();
 		if (endereco.getLogradouro() != null) {
-			alunos.setCep(this.cep);
-			alunos.setBairro(endereco.getBairro());
-			alunos.setEstado(endereco.getUf());
-			alunos.setCidade(endereco.getLocalidade());
-			alunos.setComplemento(endereco.getComplemento());
+			cliente.setCep(this.cep);
+			cliente.setBairro(endereco.getBairro());
+			cliente.setEstado(endereco.getUf());
+			cliente.setCidade(endereco.getLocalidade());
+			cliente.setComplemento(endereco.getComplemento());
 			String logradouro = endereco.getLogradouro().substring(endereco.getLogradouro().indexOf(" "),
 					endereco.getLogradouro().length());
 			int posicao = endereco.getLogradouro().length();
@@ -318,8 +368,8 @@ public class CadVendasMB implements Serializable {
 				posicao = posicao - 1;
 			}
 			String tipo = endereco.getLogradouro().substring(0, posicao + 1);
-			alunos.setLogradouro(logradouro);
-			alunos.setTipologradouro(tipo);
+			cliente.setLogradouro(logradouro);
+			cliente.setTipologradouro(tipo);
 			teste = logradouro;
 			Mensagem.lancarMensagemInfo("Atenção", "CEP encontrado com sucesso");
 		}
@@ -331,6 +381,7 @@ public class CadVendasMB implements Serializable {
 			cargahoraria = servicos.getCargahoraria();
 			descricaoFormaPagamento = servicos.getNomeservicos();
 			valorFormaPagamento = servicos.getValor();
+			nomeConsultor = servicos.getConsultores().getNome();
 			adicionarFormaPagamento();
 		}
 	}
@@ -403,8 +454,7 @@ public class CadVendasMB implements Serializable {
 	public String salvar() {
 		if (validarDados()) {
 			salvarAluno();
-			vendas.setAlunos(alunos);
-			vendas.setProfessores(professores);
+			vendas.setContratante(contratante);
 			vendas.setServicos(servicos);
 			VendasFacade vendasFacade = new VendasFacade();
 			vendas = vendasFacade.salvar(vendas);
@@ -456,7 +506,7 @@ public class CadVendasMB implements Serializable {
 			return false;
 		}
 		
-		if (alunos == null) {
+		if (cliente == null) {
 			Mensagem.lancarMensagemInfo("Atenção", "Favor inserir um Aluno a esta venda!!");
 			return false;
 		}
@@ -494,8 +544,8 @@ public class CadVendasMB implements Serializable {
 	
 	
 	public void salvarAluno() {
-		AlunosFacade alunosFacade = new AlunosFacade();
-		alunos = alunosFacade.salvar(alunos);
+		ClienteFacade clienteFacade = new ClienteFacade();
+		cliente = clienteFacade.salvar(cliente);
 	}
 	
 	
@@ -517,6 +567,15 @@ public class CadVendasMB implements Serializable {
 			if (listaFormasPagamento == null) {
 				listaFormasPagamento = new ArrayList<Formaspagamento>();
 			}
+		}
+	}
+	
+	
+	public void listarTipoServicos() {
+		TipoServicosFacade tipoServicosFacade = new TipoServicosFacade();
+		listaTipoServicos = tipoServicosFacade.listar("Select t From Tiposervicos t");
+		if (listaTipoServicos == null) {
+			listaTipoServicos = new ArrayList<Tiposervicos>();
 		}
 	}
 	

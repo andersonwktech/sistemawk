@@ -6,43 +6,43 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.sistemaWK.model.Professores;
+import br.com.sistemaWK.model.Consultores;
 import br.com.sistemaWK.util.ConectionFactory;
 
-public class ProfessoresDao {
+public class ConsultoresDao {
 
-	public Professores salvar(Professores Professores) {
+	public Consultores salvar(Consultores consultores) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-		Professores = manager.merge(Professores);
+		consultores = manager.merge(consultores);
 		tx.commit();
 		manager.close();
-		return Professores;
+		return consultores;
 	}
 
-	public Professores consultar(int idProfessores) {
+	public Consultores consultar(int idconsultores) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-		Query q = manager.createQuery("select p from Professores p where p.idprofessores=" + idProfessores);
-		Professores Professores = null;
+		Query q = manager.createQuery("select p from Consultores c where c.idconsultores=" + idconsultores);
+		Consultores consultores = null;
 		if (q.getResultList().size() > 0) {
-			Professores = (Professores) q.getResultList().get(0);
+			consultores = (Consultores) q.getResultList().get(0);
 		}
 		tx.commit();
 		manager.close();
-		return Professores;
+		return consultores;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Professores> lista(String sql) {
+	public List<Consultores> lista(String sql) {
 		EntityManager manager;
 		manager = ConectionFactory.getConnection();
 		Query q = manager.createQuery(sql);
-		List<Professores> lista = q.getResultList();
+		List<Consultores> lista = q.getResultList();
 		manager.close();
 		return lista;
 	}

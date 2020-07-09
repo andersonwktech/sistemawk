@@ -39,12 +39,9 @@ public class Vendas implements Serializable{
 	private float valorvenda;
 	@Column(name = "corstatus")
 	private String corstatus;
-	@JoinColumn(name = "alunos_idalunos", referencedColumnName = "idalunos")
+	@JoinColumn(name = "contratante_idcontratante", referencedColumnName = "idcontratante")
 	@ManyToOne(optional = false)
-	private Alunos alunos;
-	@JoinColumn(name = "professores_idprofessores", referencedColumnName = "idprofessores")
-	@ManyToOne(optional = false)
-	private Professores professores;
+	private Contratante contratante;
 	@JoinColumn(name = "servicos_idservicos", referencedColumnName = "idservicos")
 	@ManyToOne(optional = false)
 	private Servicos servicos;
@@ -116,31 +113,21 @@ public class Vendas implements Serializable{
 	}
 
 
-
-	public Alunos getAlunos() {
-		return alunos;
-	}
-
-
-
-	public void setAlunos(Alunos alunos) {
-		this.alunos = alunos;
-	}
-
-
-
-	public Professores getProfessores() {
-		return professores;
-	}
-
-
-
-	public void setProfessores(Professores professores) {
-		this.professores = professores;
-	}
-
+	
 
 	
+	public Contratante getContratante() {
+		return contratante;
+	}
+
+
+
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
+	}
+
+
+
 	public Servicos getServicos() {
 		return servicos;
 	}

@@ -4,17 +4,19 @@
 		<class>br.com.sistemaWK.model.Acesso</class>
 		<class>br.com.sistemaWK.model.Tipoacesso</class>
 		<class>br.com.sistemaWK.model.Usuario</class>
-		<class>br.com.sistemaWK.model.Professores</class>
+		<class>br.com.sistemaWK.model.Consultores</class>
 		<class>br.com.sistemaWK.model.Servicos</class>
-		<class>br.com.sistemaWK.model.Alunos</class>
+		<class>br.com.sistemaWK.model.Cliente</class>
 		<class>br.com.sistemaWK.model.Vendas</class>
 		<class>br.com.sistemaWK.model.Vendascomissao</class>
 		<class>br.com.sistemaWK.model.Contasreceber</class>
 		<class>br.com.sistemaWK.model.Formaspagamento</class>
+		<class>br.com.sistemaWK.model.Tiposervicos</class>
+		<class>br.com.sistemaWK.model.Contratante</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wktechnology?useTimezone=true&amp;serverTimezone=UTC&amp;sessionVariables=transaction_isolation='READ-COMMITTED'"/>
-			<property name="javax.persistence.jdbc.user" value="local"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="780920**"/>
 		</properties>
 	</persistence-unit>

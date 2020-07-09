@@ -21,17 +21,21 @@
 				scrollHeight="300" selectionMode="single"
 				rowKey="#{servicos.idservicos}">
 
-
-				<p:column headerText="Nome" sortBy="#{servicos.nomeservicos}"
+				
+				<p:column headerText="Tipo de Serviço" 
+					style="width:28%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{servicos.tiposervicos.descricao}" />
+				</p:column>
+				<p:column headerText="Serviço" 
 					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
 					<h:outputText value="#{servicos.nomeservicos}" />
 				</p:column>
-				<p:column headerText="Carga Horaria" sortBy="#{servicos.cargahoraria}"
-					style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
-					<h:outputText value="#{servicos.cargahoraria}" />
+				<p:column headerText="Consultor" 
+					style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{servicos.consultores.nome}" />
 				</p:column>
-				<p:column headerText="Valor" sortBy="#{servicos.valor}"
-					style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+				<p:column headerText="Valor"
+					style="width:15%; text-align:right; font-size:12px; background:white; color:black; border:#fff;">
 					<h:outputText value="#{servicos.valor}" >
 						<f:convertNumber pattern="##,###,###,###.##"
 											minFractionDigits="2" />

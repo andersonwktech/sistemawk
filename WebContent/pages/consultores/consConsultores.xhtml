@@ -7,42 +7,42 @@
 <ui:composition template="/pages/templates/padrao.xhtml">
 	<ui:define name="corpo">
 		<br />
-		<h:form id="frmConsultaprofessores">
-			<h4>Consulta de Professores</h4>
+		<h:form id="frmConsultaconsultores">
+			<h4>Consulta de Consultores</h4>
 			<hr />
 			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
 			<div align="right">
 				<p:commandLink  ajax="false" 
-				styleClass="btn btn-dark" value="Novo" action="#{professoresMB.novo()}" />
+				styleClass="btn btn-dark" value="Novo" action="#{consultoresMB.novo()}" />
 			</div>
-			<p:dataTable id="idTabelaprofessores" var="professores"
-				value="#{professoresMB.listaProfessores}" style="border:none;"
+			<p:dataTable id="idTabelaConsultores" var="consultores"
+				value="#{consultoresMB.listaConsultores}" style="border:none;"
 				class="tabelacontas" scrollRows="10" scrollable="true"
 				scrollHeight="300" selectionMode="single"
-				rowKey="#{professores.idprofessores}">
+				rowKey="#{consultores.idconsultores}">
 
 
-				<p:column headerText="Nome" sortBy="#{professores.nome}"
+				<p:column headerText="Nome" 
 					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
-					<h:outputText value="#{professores.nome}" />
+					<h:outputText value="#{consultores.nome}" />
 				</p:column>
-				<p:column headerText="Email" sortBy="#{professores.email}"
+				<p:column headerText="Email" 
 					style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
-					<h:outputText value="#{professores.email}" />
+					<h:outputText value="#{consultores.email}" />
 				</p:column>
-				<p:column headerText="Telefone" sortBy="#{professores.telefone}"
+				<p:column headerText="Telefone" 
 					style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
-					<h:outputText value="#{professores.telefone}" />
+					<h:outputText value="#{consultores.telefone}" />
 				</p:column>
 				<p:column headerText=""
 					style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
-					<p:commandLink ajax="false" action="#{professoresMB.editar(professores)}"
+					<p:commandLink ajax="false" action="#{consultoresMB.editar(consultores)}"
 						style="text-align: left;color:black;">
 						<span data-feather="edit"></span>
 					</p:commandLink>
-					<p:commandLink ajax="false" action="#{professoresMB.ativarDesativarProfessores(professores)}"  update=":frmConsultaprofessores:growl, idTabelaprofessores" 
+					<p:commandLink ajax="false" action="#{consultoresMB.ativarDesativarConsultores(consultores)}"  update=":frmConsultaconsultores:growl, idTabelaConsultores" 
 						style="text-align: left;color:black;">
-						<span data-feather="#{professores.descricaoativo}"></span>
+						<span data-feather="#{consultores.descricaoativo}"></span>
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>

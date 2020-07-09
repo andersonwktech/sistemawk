@@ -9,31 +9,31 @@
 	<ui:define name="corpo">
 		<h:form id="frmCadastroUsuario" acceptcharset="ISO-8859-1">
 
-			<h4>Cadastro de Alunos</h4>
+			<h4>Cadastro de Cliente</h4>
 			<hr />
 			<br />
 			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label>Nome</label>
-					<h:inputText value="#{cadAlunosMB.alunos.nome}"
+					<h:inputText value="#{cadclienteMB.cliente.nome}"
 						class="form-control" placeholder="Email" />
 				</div>
 				<div class="form-group col-md-6">
 					<label>E-mail</label>
-					<h:inputText value="#{cadAlunosMB.alunos.email}"
+					<h:inputText value="#{cadclienteMB.cliente.email}"
 						class="form-control" placeholder="Email" />
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-3">
 					<label>Telefone Celular</label>
-					<p:inputMask mask="(99) 99999-9999" value="#{cadAlunosMB.alunos.telefonecelular}" style="border:0px;font-size:14px;"
+					<p:inputMask mask="(99) 99999-9999" value="#{cadclienteMB.cliente.telefonecelular}" style="border:0px;font-size:14px;"
 						class="form-control" id="telefoneCelular" />
 				</div>
 				<div class="form-group col-md-3">
 					<label>CPF</label>
-					<p:inputMask mask="999.999.999-99" value="#{cadAlunosMB.alunos.cpf}" style="border:0px;font-size:14px;"
+					<p:inputMask mask="999.999.999-99" value="#{cadclienteMB.cliente.cpf}" style="border:0px;font-size:14px;"
 						class="form-control" id="cpf" />
 				</div>
 			</div>
@@ -47,30 +47,30 @@
 						<label for="inputCEP">CEP</label>
 
 						<h:panelGrid columns="2" style="width:100%;">
-							<h:inputText value="#{cadAlunosMB.alunos.cep}"
+							<h:inputText value="#{cadclienteMB.cliente.cep}"
 								class="form-control" id="inputCEP" placeholder="CEP" />
 							<p:commandLink id="btnConfirmar" value="Buscar"
 								update="inputTipoLogradouro, inputlogradouro, inputNumero,
 							 inputComplemento, inputBairro, inputUfEstado, infCep"
-								action="#{cadAlunosMB.buscarendereco()}" ajax="false"
+								action="#{cadclienteMB.buscarendereco()}" ajax="false"
 								styleClass="btn btn-dark" />
 						</h:panelGrid>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputTipoLogradouro">Tipo Logradouro</label>
-						<h:inputText value="#{cadAlunosMB.alunos.tipologradouro}"
+						<h:inputText value="#{cadclienteMB.cliente.tipologradouro}"
 							class="form-control" id="inputTipoLogradouro"
 							placeholder="Tipo Logradouro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputlogradouro">Logradouro</label>
-						<h:inputText value="#{cadAlunosMB.alunos.logradouro}"
+						<h:inputText value="#{cadclienteMB.cliente.logradouro}"
 							class="form-control" id="inputlogradouro"
 							placeholder="Logradouro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputNumero">Número</label>
-						<h:inputText value="#{cadAlunosMB.alunos.numero}"
+						<h:inputText value="#{cadclienteMB.cliente.numero}"
 							class="form-control" id="inputNumero" placeholder="Número" />
 					</div>
 				</div>
@@ -79,22 +79,22 @@
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="inputComplemento">Complemento</label>
-						<h:inputText value="#{cadAlunosMB.alunos.complemento}"
+						<h:inputText value="#{cadclienteMB.cliente.complemento}"
 							class="form-control" id="inputComplemento" placeholder="CEP" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputBairro">Bairro</label>
-						<h:inputText value="#{cadAlunosMB.alunos.bairro}"
+						<h:inputText value="#{cadclienteMB.cliente.bairro}"
 							class="form-control" id="inputBairro" placeholder="Bairro" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputCidade">Cidade</label>
-						<h:inputText value="#{cadAlunosMB.alunos.cidade}"
+						<h:inputText value="#{cadclienteMB.cliente.cidade}"
 							class="form-control" id="inputCidade" placeholder="Cidade" />
 					</div>
 					<div class="form-group col-md-3">
 						<label for="inputUfEstado">UF - Estado</label>
-						<h:inputText value="#{cadAlunosMB.alunos.estado}"
+						<h:inputText value="#{cadclienteMB.cliente.estado}"
 							class="form-control" id="inputUfEstado" placeholder="UF Estado" />
 					</div>
 				</div>
@@ -107,11 +107,11 @@
  
 				<p:commandLink ajax="false" update="growl"
 					styleClass="btn btn-success" value="Confirmar"
-					action="#{cadAlunosMB.salvar()}" />
+					action="#{cadclienteMB.salvar()}" />
 
 				<p:commandLink ajax="false" styleClass="btn btn-danger"
 					style="margin-left:1%;" value="Cancelar"
-					action="#{cadAlunosMB.cancelar()}" />
+					action="#{cadclienteMB.cancelar()}" />
 
 			</div>
 			<br />

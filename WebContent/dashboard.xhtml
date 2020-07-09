@@ -56,24 +56,24 @@
 								</a>
 									<ul class="dropdown-menu">
 										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/alunos/consAlunos.jsf"> <span
-												data-feather="users"></span> Alunos
+											href="pages/consultores/consConsultores.jsf"> <span
+												data-feather="users"></span> Consultores
 										</a></li>
 										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/usuario/consUsuario.jsf"> <span
-												data-feather="users"></span> Usuário
+											href="pages/servicos/consServicos.jsf"> <span
+												data-feather="users"></span> Serviços
 										</a></li>
 										<li style="font-size: 12px;"><a class="nav-link"
 											href="pages/tipoacesso/consAcesso.jsf"> <span
 												data-feather="users"></span> Tipo Acesso
 										</a></li>
 										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/professores/consProfessores.jsf"> <span
-												data-feather="users"></span> Professores
+											href="pages/tiposervicos/consTipoServicos.jsf"> <span
+												data-feather="users"></span> Tipo Serviços
 										</a></li>
 										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/servicos/consServicos.jsf"> <span
-												data-feather="users"></span> Serviços
+											href="pages/usuario/consUsuario.jsf"> <span
+												data-feather="users"></span> Usuário
 										</a></li>
 									</ul></li>
 							</h:panelGroup>
@@ -116,42 +116,46 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-					<div class="row" style="color: white;">
-						<div class="col-md-4">
-							<div class="panel-stat3"
-								style="background: #145B7A; opacity: 0.75; padding: 25px 20px; border-radius: 15px;">
-								<h5 style="font-family: Segoe UI Semibold;">Cursos</h5>
-								<h4 class="m-top-none" id="userCount"
-									style="color: black; font-family: Segoe UI Semibold;"></h4>
-								<div class="stat-icon" style="opacity: 0.9;">
-									<i class="fa fa-usd fa-3x" style="color: #FFD700;"></i>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="panel-stat3 bg-info"
-								style="margin-right: 6%; background: #145B7A; opacity: 0.75; padding: 25px 20px; border-radius: 15px;">
-								<h5 style="font-family: Segoe UI Semibold;">Vagas</h5>
-								<h4 class="m-top-none"
-									style="color: black; font-family: Segoe UI Semibold;"></h4>
 
-								<div class="stat-icon" style="opacity: 0.9;">
-									<i class="fa fa-plus fa-3x" style="color: #FFD700;"></i>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="panel-stat3 bg-success"
-								style="margin-right: 6%; background: #145B7A; opacity: 0.75; padding: 25px 20px; border-radius: 15px;">
-								<h5 style="font-family: Segoe UI Semibold;">Contas a
-									Receber</h5>
-								<h4 class="m-top-none" id="visitorCount"
-									style="color: black; font-family: Segoe UI Semibold;"></h4>
-								<div class="stat-icon" style="opacity: 0.9;">
-									<i class="fa fa-minus fa-3x" style="color: #FFD700;"></i>
-								</div>
-							</div>
-						</div>
+					<h4>Últimas Vendas</h4>
+					<div class="row" style="color: white;">
+						<p:dataTable id="idTabelaVendas" var="vendas"
+							value="#{dashboardMB.listaVendas}" 
+							class="tabelacontas" scrollRows="10" scrollable="true"
+							scrollHeight="300" selectionMode="single"
+							rowKey="#{vendas.idvendas}">
+
+							<p:column headerText="ID"
+								style="width:7%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+								<h:outputText value="#{vendas.idvendas}" />
+							</p:column>
+							<p:column headerText="Data Venda"
+								style="width:12%; text-align:center; font-size:12px; background:white; color:black; border:#fff;">
+								<h:outputText value="#{vendas.datavenda}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Contratante"
+								style="width:18%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+								<h:outputText value="#{vendas.contratante.cpfcnpj}" />
+							</p:column>
+							<p:column headerText="Tipo Serviço"
+								style="width:36%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+								<h:outputText value="#{vendas.servicos.tiposervicos.descricao}" />
+							</p:column>
+							<p:column headerText="Serviço"
+								style="width:36%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+								<h:outputText value="#{vendas.servicos.nomeservicos}" />
+							</p:column>
+							<p:column headerText="Valor R$" sortBy=""
+								style="width:12%;text-align:right; font-size:12px; background:white; color:black; border:#fff;">
+								<h:outputText value="#{vendas.valorvenda}">
+									<f:convertNumber pattern="##,###,###,###.##"
+										minFractionDigits="2" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
 					</div>
 				</main>
 			</div>

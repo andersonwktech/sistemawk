@@ -8,11 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "alunos")
-public class Alunos implements Serializable{
+@Table(name = "cliente")
+public class Cliente implements Serializable{
 
 	/**
 	 * 
@@ -21,8 +23,8 @@ public class Alunos implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idalunos")
-    private Integer idalunos;
+    @Column(name = "idcliente")
+    private Integer idcliente;
 	@Column(name = "nome")
 	private String nome;
 	@Column(name = "email")
@@ -47,24 +49,39 @@ public class Alunos implements Serializable{
 	private String complemento;
 	@Column(name = "cpf")
 	private String cpf;
+	@JoinColumn(name = "contratante_idcontratante", referencedColumnName = "idcontratante")
+	@ManyToOne(optional = false)
+	private Contratante contratante;
 	
 	
 	
-	public Alunos() {
+	public Cliente() {
 	
 	}
 
 
 
-	public Integer getIdalunos() {
-		return idalunos;
+	
+
+
+
+	public Integer getIdcliente() {
+		return idcliente;
 	}
 
 
 
-	public void setIdalunos(Integer idalunos) {
-		this.idalunos = idalunos;
+
+
+
+
+	public void setIdcliente(Integer idcliente) {
+		this.idcliente = idcliente;
 	}
+
+
+
+
 
 
 
@@ -212,22 +229,42 @@ public class Alunos implements Serializable{
 
 
 
+	public Contratante getContratante() {
+		return contratante;
+	}
+
+
+
+
+
+
+
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
+	}
+
+
+
+
+
+
+
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (idalunos != null ? idalunos.hashCode() : 0);
+		hash += (idcliente != null ? idcliente.hashCode() : 0);
 		return hash;
 	}
 
 	@Override
 	public boolean equals(Object object) {
 		//
-		if (!(object instanceof Alunos)) {
+		if (!(object instanceof Cliente)) {
 			return false;
 		}
-		Alunos other = (Alunos) object;
-		if ((this.idalunos == null && other.idalunos != null)
-				|| (this.idalunos != null && !this.idalunos.equals(other.idalunos))) {
+		Cliente other = (Cliente) object;
+		if ((this.idcliente == null && other.idcliente != null)
+				|| (this.idcliente != null && !this.idcliente.equals(other.idcliente))) {
 			return false;
 		}
 		return true;
@@ -235,7 +272,7 @@ public class Alunos implements Serializable{
 
 	@Override
 	public String toString() {
-		return "br.com.sistemaWK.model.Alunos[ idalunos=" + idalunos + " ]";
+		return "br.com.sistemaWK.model.Cliente[ idcliente=" + idcliente + " ]";
 	}
 	
 	

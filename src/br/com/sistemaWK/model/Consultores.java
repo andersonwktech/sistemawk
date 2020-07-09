@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "professores")
-public class Professores implements Serializable{
+@Table(name = "consultores")
+public class Consultores implements Serializable{
 
 	/**
 	 * 
@@ -21,8 +21,8 @@ public class Professores implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idprofessores")
-    private Integer idprofessores;
+    @Column(name = "idconsultores")
+    private Integer idconsultores;
 	@Column(name = "nome")
 	private String nome;
 	@Column(name = "email")
@@ -36,21 +36,33 @@ public class Professores implements Serializable{
 	
 	
 	
-	public Professores() {
+	public Consultores() {
 	
 	}
 
 
 
-	public Integer getIdprofessores() {
-		return idprofessores;
+	
+
+
+
+	public Integer getIdconsultores() {
+		return idconsultores;
 	}
 
 
 
-	public void setIdprofessores(Integer idprofessores) {
-		this.idprofessores = idprofessores;
+
+
+
+
+	public void setIdconsultores(Integer idconsultores) {
+		this.idconsultores = idconsultores;
 	}
+
+
+
+
 
 
 
@@ -119,19 +131,19 @@ public class Professores implements Serializable{
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (idprofessores != null ? idprofessores.hashCode() : 0);
+		hash += (idconsultores != null ? idconsultores.hashCode() : 0);
 		return hash;
 	}
 
 	@Override
 	public boolean equals(Object object) {
 		//
-		if (!(object instanceof Professores)) {
+		if (!(object instanceof Consultores)) {
 			return false;
 		}
-		Professores other = (Professores) object;
-		if ((this.idprofessores == null && other.idprofessores != null)
-				|| (this.idprofessores != null && !this.idprofessores.equals(other.idprofessores))) {
+		Consultores other = (Consultores) object;
+		if ((this.idconsultores == null && other.idconsultores != null)
+				|| (this.idconsultores != null && !this.idconsultores.equals(other.idconsultores))) {
 			return false;
 		}
 		return true;
@@ -139,7 +151,7 @@ public class Professores implements Serializable{
 
 	@Override
 	public String toString() {
-		return "br.com.sistemaWK.model.Professores[ idprofessores=" + idprofessores + " ]";
+		return "br.com.sistemaWK.model.Consultores[ idconsultores=" + idconsultores + " ]";
 	}
 	
 	
