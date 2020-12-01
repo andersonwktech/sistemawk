@@ -19,6 +19,11 @@ public class ContratanteFacade {
 		contratanteDao = new ContratanteDao();
 		return contratanteDao.consultar(idcontratante);
 	}
+	
+	public Contratante consultarCPFCPNJ(String cpfcnpj) {
+		contratanteDao = new ContratanteDao();
+		return contratanteDao.consultarCPFCNPJ(cpfcnpj);
+	}
 
 	public List<Contratante> listar(String sql) {
 		contratanteDao = new ContratanteDao();

@@ -25,6 +25,8 @@ public class Tiposervicos implements Serializable{
     private Integer idtiposervicos;
 	@Column(name = "descricao")
 	private String descricao;
+	@Column(name = "dadoscliente")
+	private boolean dadoscliente;
 	
 	
 	public Tiposervicos() {
@@ -53,6 +55,16 @@ public class Tiposervicos implements Serializable{
 	
 	
 	
+	public boolean isDadoscliente() {
+		return dadoscliente;
+	}
+
+
+	public void setDadoscliente(boolean dadoscliente) {
+		this.dadoscliente = dadoscliente;
+	}
+
+
 	@Override
 	public int hashCode() {
 		int hash = 0;

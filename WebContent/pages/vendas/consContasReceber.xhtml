@@ -19,13 +19,13 @@
 			<p:dataTable id="idTabelaContas" var="contas"
 				value="#{contasReceberMB.listaContasReceber}" style="border:none;"
 				class="tabelacontas" scrollRows="10" scrollable="true"
-				scrollHeight="200" rowIndexVar="rowIx">
+				scrollHeight="500" rowIndexVar="rowIx">
 
-				<p:column headerText="Devedor" sortBy="#{contas.vendas.alunos.nome}"
+				<p:column headerText="Contratante" 
 					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
-					<h:outputText value="#{contas.vendas.alunos.nome}" />
+					<h:outputText value="#{contas.vendas.contratante.nomefantasia}" />
 				</p:column>
-				<p:column headerText="Parcela" sortBy="#{contas.numeroparcela}"
+				<p:column headerText="Parcela" 
 					style="width:10%; font-size:12px; background:white; color:black; border:none;text-align:left;">
 					<h:outputText value="#{contas.numeroparcela}" />
 				</p:column>

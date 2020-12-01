@@ -7,7 +7,7 @@
 <ui:composition template="/pages/templates/padrao.xhtml">
 	<ui:define name="corpo">
 		<br />
-		<h:form id="frmCadastroUsuario" acceptcharset="ISO-8859-1">
+		<h:form id="frmCadastroUsuario" acceptcharset="UTF-8">
 			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
 				closable="false" resizable="false" showHeader="false">
 				<p:outputLabel value="Aguarde.."
@@ -20,182 +20,319 @@
 			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
 
 			<br />
-			<h6>Dados do Aluno</h6>
+
+			<div id="form-row">
+				<div class="form-group col-md-3">
+					<label>Data da Venda</label>
+					<p:calendar locale="pt_BR" pattern="dd/MM/yyyy"
+						value="#{cadVendasMB.vendas.datavenda}" style="font-size:14px;"
+						id="dataVenda">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+						<p:ajax event="dateSelect" />
+						<p:ajax event="blur" />
+					</p:calendar>
+				</div>
+			</div>
+			<br />
+			<h6>Contratante</h6>
+			<hr />
+			<div class="form-row">
+				<div class="formgroup col-md-3">
+					<label style="font-size: 14px;">CPF/CNPJ</label>
+					<p:selectOneRadio value="#{cadVendasMB.contratante.tipopessoa}">
+						<f:selectItem itemLabel="Física" itemValue="PF" />
+						<f:selectItem itemLabel="Jurídica" itemValue="PJ" />
+						<p:ajax event="change" listener="#{cadVendasMB.trocarContratante()}"
+							update="tipopessoa, pessoaJuridica, pessoaFisica" process="@this" />
+					</p:selectOneRadio>
+				</div>
+				<h:panelGroup id="tipopessoa" style="width:100%;">
+					<div class="form-group col-md-3">
+						<p:inputMask mask="999.999.999-99"
+							value="#{cadVendasMB.cpfContratante}"
+							rendered="#{cadVendasMB.verificarContratantePF}"
+							style="font-size:14px;" id="cpfContratante" >
+							<p:ajax event="change" listener="#{cadVendasMB.buscarContratante()}" process="@this"
+								update="pessoaFisica, growl, nomePF"/>
+						</p:inputMask> 
+						<p:inputMask mask="99.999.999/9999-99"
+							rendered="#{cadVendasMB.verificarContratantePJ}"
+							value="#{cadVendasMB.cpfContratante}"
+							style="font-size:14px;" id="cnpjContratante" >
+							<p:ajax event="change" listener="#{cadVendasMB.buscarContratante()}" process="@this"
+								update="pessoaJuridica, growl"/>
+						</p:inputMask>
+					</div>
+				</h:panelGroup>
+			</div>
+			<h:panelGroup id="pessoaJuridica">
+				<div class="form-row">
+					<div class="formgroup col-md-6">
+						<h:panelGroup
+							rendered="#{cadVendasMB.verificarContratantePJ}">
+							<label style="font-size: 14px;">Razão Social</label>
+							<h:inputText value="#{cadVendasMB.contratante.razaosocial}"
+								class="form-control" />
+						</h:panelGroup>
+					</div>
+					<div class="formgroup col-md-6">
+						<h:panelGroup
+							rendered="#{cadVendasMB.verificarContratantePJ}">
+							<label style="font-size: 14px;">Nome Fantasia</label>
+							<h:inputText value="#{cadVendasMB.contratante.nomefantasia}"
+								class="form-control" />
+						</h:panelGroup>
+					</div>
+				</div>
+				<br />
+				<div class="form-row">
+					<div class="formgroup col-md-6">
+						<h:panelGroup
+							rendered="#{cadVendasMB.verificarContratantePJ}">
+							<label style="font-size: 14px;">Endereço</label>
+							<h:inputText value="#{cadVendasMB.contratante.endereco}"
+								class="form-control" />
+						</h:panelGroup>
+					</div>
+				</div>
+			</h:panelGroup>
+			<h:panelGroup id="pessoaFisica">
+				<div class="form-row">
+					<div class="formgroup col-md-6">
+						<h:panelGroup rendered="#{cadVendasMB.verificarContratantePF}">
+							<label style="font-size: 14px;">Nome Completo</label>
+							<h:inputText value="#{cadVendasMB.contratante.nomefantasia}"
+								class="form-control" id="nomePF" />
+						</h:panelGroup>
+					</div>
+				</div>
+				<br />
+			</h:panelGroup>
+			<br />
+
+			<h6>Responsável Financeiro</h6>
+			<hr />
+
+			<h:panelGroup id="infResponsavelFinanceiro" style="width:100%;">
+				<div class="form-row">
+					<div class="form-group col-md-5">
+						<label for="inputNome">Nome</label>
+						<h:inputText value="#{cadVendasMB.vendasClienteFinanceiro.cliente.nome}"
+							class="form-control" placeholder="Nome" />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="inputRG">Email</label>
+						<h:inputText value="#{cadVendasMB.vendasClienteFinanceiro.cliente.email}"
+							class="form-control" placeholder="RG" />
+					</div>
+					<div class="form-group col-md-3">
+						<label for="dataNasc">Telefone Celular</label>
+						<p:inputMask class="form-control" mask="(99) 99999-9999"
+							value="#{cadVendasMB.vendasClienteFinanceiro.cliente.telefonecelular}">
+						</p:inputMask>
+					</div>
+				</div>
+			</h:panelGroup>
+			<br/>
+			<h6>Serviços</h6>
 			<hr />
 
 			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label for="inputCpf">Contratante</label>
-					<h:panelGrid columns="2" style="width:100%;">
-						<p:inputMask mask="999.999.999-99"
-							value="#{cadVendasMB.cpfContratante}"
-							style="border:0px;font-size:14px;" class="form-control"
-							id="cpfContratante" />
-						<p:commandLink id="btncliente" value="Buscar" action="#"
-							styleClass="btn btn-dark"
-							update="infAluno, infEnderecoAluno, panelCep">
-						</p:commandLink>
-					</h:panelGrid>
+				<div class="form-group col-md-6">
+					<label>Tipo de Serviço</label> <br />
+					<p:selectOneMenu id="cliente" value="#{cadVendasMB.tiposervicos}"
+						converter="TipoServicosConverter" filter="true" style="width:90%;"
+						filterMatchMode="contains" panelStyle="width:180px">
+						<f:selectItem itemLabel="Selecione" itemValue="0"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadVendasMB.listaTipoServicos}"
+							var="clienteselecionado"
+							itemLabel="#{clienteselecionado.descricao}"
+							itemValue="#{clienteselecionado}" />
+						<f:attribute name="listaTipoServicos"
+							value="#{cadVendasMB.listaTipoServicos}" />
+						<p:ajax event="change" listener="#{cadVendasMB.listarServicos()}"
+							update="exampleProdutos, infAluno, infEnderecoAluno, infAdicionarCliente, infoTabelaClientes"
+							process="@this" />
+					</p:selectOneMenu>
 				</div>
+
+				<div class="form-group col-md-6">
+					<label>Serviços</label> <br />
+					<p:selectOneMenu id="exampleProdutos" style="width:90%;"
+						value="#{cadVendasMB.servicos}" converter="ServicosConverter"
+						filter="true" filterMatchMode="contains" panelStyle="width:180px">
+						<f:selectItem itemLabel="Selecione" itemValue="0"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cadVendasMB.listaServicos}"
+							var="clienteselecionado"
+							itemLabel="#{clienteselecionado.nomeservicos}"
+							itemValue="#{clienteselecionado}" />
+						<f:attribute name="listaServicos"
+							value="#{cadVendasMB.listaServicos}" />
+						<p:ajax event="change" listener="#{cadVendasMB.dadosProdutos()}"
+							update="infProdutos, valorServico, idTabelaPagamentos,
+							panelCalculoPagamento" />
+					</p:selectOneMenu>
+				</div>
+
 			</div>
+			<br />
 
 			<h:panelGroup id="infAluno" style="width:100%;">
+				<h:panelGroup
+					rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+					<h6>Dados do Cliente</h6>
+					<hr />
+				</h:panelGroup>
 				<div class="form-row">
+					<div class="form-group col-md-5">
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputNome">Nome</label>
+							<h:inputText value="#{cadVendasMB.cliente.nome}"
+								class="form-control" id="inputNome" placeholder="Nome" />
+						</h:panelGroup>
+					</div>
 					<div class="form-group col-md-4">
-						<label for="inputCpf">CPF</label>
-						<h:panelGrid columns="2" style="width:100%;">
-							<p:inputMask mask="999.999.999-99"
-								value="#{cadVendasMB.cpfCliente}"
-								style="border:0px;font-size:14px;" class="form-control" id="cpf" />
-							<p:commandLink id="btncliente" value="Buscar"
-								action="#{cadVendasMB.buscarCliente()}"
-								styleClass="btn btn-dark"
-								update="infAluno, infEnderecoAluno, panelCep">
-							</p:commandLink>
-						</h:panelGrid>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputNome">Nome</label>
-						<h:inputText value="#{cadVendasMB.cliente.nome}"
-							class="form-control" id="inputNome" placeholder="Nome" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputRG">Email</label>
+							<h:inputText value="#{cadVendasMB.cliente.email}"
+								class="form-control" id="inputRG" placeholder="RG" />
+						</h:panelGroup>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="inputRG">Email</label>
-						<h:inputText value="#{cadVendasMB.cliente.email}"
-							class="form-control" id="inputRG" placeholder="RG" />
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label for="dataNasc">Telefone Celular</label>
-						<h:inputText class="form-control"
-							value="#{cadVendasMB.cliente.telefonecelular}">
-						</h:inputText>
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="dataNasc">Telefone Celular</label>
+							<p:inputMask class="form-control" mask="(99) 99999-9999"
+								value="#{cadVendasMB.cliente.telefonecelular}">
+							</p:inputMask>
+						</h:panelGroup>
 					</div>
 				</div>
 			</h:panelGroup>
 			<br />
-			<br />
-			<h6>Endereço</h6>
-			<hr />
 
-			<h:panelGroup id="panelCep">
-				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="inputCEP">CEP</label>
-
-						<h:panelGrid columns="2" style="width:100%;">
-							<h:inputText value="#{cadVendasMB.cep}" class="form-control"
-								id="inputCEP" placeholder="CEP" />
-							<p:commandLink id="btnConfirmar" value="Buscar"
-								action="#{cadVendasMB.buscarendereco()}"
-								styleClass="btn btn-dark" update="infEnderecoAluno">
-							</p:commandLink>
-						</h:panelGrid>
-					</div>
-				</div>
-			</h:panelGroup>
 			<h:panelGroup id="infEnderecoAluno">
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="inputTipoLogradouro">Tipo Logradouro</label>
-						<h:inputText value="#{cadVendasMB.cliente.tipologradouro}"
-							class="form-control" id="inputTipoLogradouro"
-							placeholder="Tipo Logradouro" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputCEP">CEP</label>
+							<p:inputMask mask="99999-999" value="#{cadVendasMB.cep}"
+								class="form-control" id="inputCEP" placeholder="CEP">
+								<p:ajax event="change"
+									listener="#{cadVendasMB.buscarendereco()}"
+									update="infEnderecoAluno" />
+							</p:inputMask>
+						</h:panelGroup>
+					</div>
+					<div class="form-group col-md-6">
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputlogradouro">Logradouro</label>
+							<h:inputText value="#{cadVendasMB.cliente.logradouro}"
+								class="form-control" id="inputlogradouro"
+								placeholder="Logradouro" />
+						</h:panelGroup>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="inputlogradouro">Logradouro</label>
-						<h:inputText value="#{cadVendasMB.cliente.logradouro}"
-							class="form-control" id="inputlogradouro"
-							placeholder="Logradouro" />
-					</div>
-					<div class="form-group col-md-3">
-						<label for="inputNumero">Número</label>
-						<h:inputText value="#{cadVendasMB.cliente.numero}"
-							class="form-control" id="inputNumero" placeholder="Número" />
-					</div>
-					<div class="form-group col-md-3">
-						<label for="inputComplemento">Complemento</label>
-						<h:inputText value="#{cadVendasMB.cliente.complemento}"
-							class="form-control" id="inputComplemento" placeholder="CEP" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputNumero">Número</label>
+							<h:inputText value="#{cadVendasMB.cliente.numero}"
+								class="form-control" id="inputNumero" placeholder="Número" />
+						</h:panelGroup>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="inputBairro">Bairro</label>
-						<h:inputText value="#{cadVendasMB.cliente.bairro}"
-							class="form-control" id="inputBairro" placeholder="Bairro" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputComplemento">Complemento</label>
+							<h:inputText value="#{cadVendasMB.cliente.complemento}"
+								class="form-control" id="inputComplemento" placeholder="CEP" />
+						</h:panelGroup>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="inputCidade">Cidade</label>
-						<h:inputText value="#{cadVendasMB.cliente.cidade}"
-							class="form-control" id="inputCidade" placeholder="Cidade" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputBairro">Bairro</label>
+							<h:inputText value="#{cadVendasMB.cliente.bairro}"
+								class="form-control" id="inputBairro" placeholder="Bairro" />
+						</h:panelGroup>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="inputUfEstado">UF - Estado</label>
-						<h:inputText value="#{cadVendasMB.cliente.estado}"
-							class="form-control" id="inputUfEstado" placeholder="UF Estado" />
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputCidade">Cidade</label>
+							<h:inputText value="#{cadVendasMB.cliente.cidade}"
+								class="form-control" id="inputCidade" placeholder="Cidade" />
+						</h:panelGroup>
+					</div>
+					<div class="form-group col-md-3">
+						<h:panelGroup
+							rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							<label for="inputUfEstado">UF - Estado</label>
+							<h:inputText value="#{cadVendasMB.cliente.estado}"
+								class="form-control" id="inputUfEstado" placeholder="UF Estado" />
+						</h:panelGroup>
 					</div>
 				</div>
 			</h:panelGroup>
 			<br />
+
+			<h:panelGroup id="infAdicionarCliente">
+				<p:commandLink id="btncontratante" value="Adicionar Cliente" 
+					action="#{cadVendasMB.adicionarCliente()}"
+					styleClass="btn btn-dark" rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}"
+					update="infAluno, infEnderecoAluno, infoTabelaClientes,
+					infProdutos, valorServico, idTabelaPagamentos, panelCalculoPagamento">
+				</p:commandLink>
+			</h:panelGroup>
 			<br />
-			<h6>Serviços</h6>
-			<hr />
-			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label>Tipo de Serviço*</label>
-					<h:panelGrid columns="2" style="width:100%;">
-						<h:selectOneMenu id="exampleTipoServicos" style="width: 100%;"
-							immediate="true" value="#{cadVendasMB.tiposervicos}"
-							converter="ServicosConverter" styleClass="form-control">
-							<f:selectItem itemLabel="Selecione" itemValue="0"
-								noSelectionOption="true" />
-							<f:selectItems value="#{cadVendasMB.listaTipoServicos}"
-								var="servicosSelecionado"
-								itemLabel="#{servicosSelecionado.descricao}"
-								itemValue="#{servicosSelecionado}" />
-							<f:attribute name="listaServicos"
-								value="#{cadVendasMB.listaTipoServicos}" />
-						</h:selectOneMenu>
-						<p:commandLink id="btnAdicionar" value="Adicionar"
-							action="#" style="margin-left:2%;"
-							update="infProdutos, valorServico, idTabelaPagamentos, panelValorRestante"
-							styleClass="btn btn-dark">
+			<br />
+			<h:panelGroup id="infoTabelaClientes">
+				<p:dataTable id="idTabelaCliente" var="vendascliente" rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}"
+					value="#{cadVendasMB.listaCliente}" style="border:none;"
+					class="tabelacontas" scrollRows="10" scrollable="true"
+					scrollHeight="300" rowIndexVar="rowIx">
+
+
+					<p:column headerText="Nome"
+						style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+						<h:outputText value="#{vendascliente.cliente.nome}" />
+					</p:column>
+					<p:column headerText="Email"
+						style="width:32%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+						<h:outputText value="#{vendascliente.cliente.email}" />
+					</p:column>
+					<p:column headerText="Telefone"
+						style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+						<h:outputText value="#{vendascliente.cliente.telefonecelular}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText=""
+						style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+						<p:commandLink action="#{cadVendasMB.excluirCliente(rowIx)}"
+							style="text-align: left;color:black;"
+							update=":frmCadastroUsuario:infAluno, :frmCadastroUsuario:infEnderecoAluno, 
+							:frmCadastroUsuario:infoTabelaClientes, :frmCadastroUsuario:infoTabelaClientes
+							:frmCadastroUsuario:infProdutos, :frmCadastroUsuario:valorServico, 
+							:frmCadastroUsuario:idTabelaPagamentos, 
+							:frmCadastroUsuario:panelCalculoPagamento">
+							<img src="../../resources/img/excluir.svg" style="width: 18%;" />
 						</p:commandLink>
-					</h:panelGrid>
-				</div>
-				<div class="form-group col-md-6">
-					<label>Serviços*</label>
-					<h:panelGrid columns="2" style="width:100%;">
-						<h:selectOneMenu id="exampleProdutos" style="width: 100%;"
-							immediate="true" value="#{cadVendasMB.servicos}"
-							converter="ServicosConverter" styleClass="form-control">
-							<f:selectItem itemLabel="Selecione" itemValue="0"
-								noSelectionOption="true" />
-							<f:selectItems value="#{cadVendasMB.listaServicos}"
-								var="servicosSelecionado"
-								itemLabel="#{servicosSelecionado.nomeservicos}"
-								itemValue="#{servicosSelecionado}" />
-							<f:attribute name="listaServicos"
-								value="#{cadVendasMB.listaServicos}" />
-						</h:selectOneMenu>
-						<p:commandLink id="btnAdicionar" value="Adicionar"
-							action="#{cadVendasMB.dadosProdutos()}" style="margin-left:2%;"
-							update="infProdutos, valorServico, idTabelaPagamentos, panelValorRestante"
-							styleClass="btn btn-dark">
-						</p:commandLink>
-					</h:panelGrid>
-				</div>
-				<div class="form-group col-md-3">
-					<label>Valor R$</label>
-					<h:inputText value="#{cadVendasMB.valorServico}" id="valorServico"
-						class="form-control" style="text-align:right;">
-						<f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-					</h:inputText>
-				</div>
-			</div>
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+			<br />
+			<br />
+
 			<h:panelGroup id="infProdutos">
 				<div class="form-row">
 					<div class="form-group col-md-3">
@@ -203,38 +340,35 @@
 						<h:inputText value="#{cadVendasMB.nomeConsultor}" readonly="true"
 							id="consultor" class="form-control" />
 					</div>
+					<div class="form-group col-md-2">
+						<label>Valor R$</label>
+						<h:inputText value="#{cadVendasMB.valorServico}" id="valorServico"
+							class="form-control" style="text-align:right;">
+							<f:convertNumber pattern="##,###,###,###.##"
+								minFractionDigits="2" locale="pt_BR" />
+							<p:ajax event="change"
+								listener="#{cadVendasMB.alterarFormaPagamento()}"
+								update="panelPagamentos, panelCalculoPagamento" />
+						</h:inputText>
+					</div>
+					<div class="form-group col-md-2">
+						<label>Desconto R$</label>
+						<h:inputText value="#{cadVendasMB.descontoServico}"
+							id="descontoServico" class="form-control"
+							style="text-align:right;">
+							<f:convertNumber pattern="##,###,###,###.##"
+								minFractionDigits="2" />
+							<p:ajax event="change"
+								listener="#{cadVendasMB.alterarFormaPagamento()}"
+								update="panelPagamentos, panelCalculoPagamento" />
+						</h:inputText>
+					</div>
 				</div>
 			</h:panelGroup>
 			<br />
 
 			<h6>Lista de Serviços</h6>
 			<hr />
-			<h:panelGroup id="panelAdicionarPagamento">
-				<div class="form-row">
-
-					<div class="form-group col-md-6">
-						<label>Descrição</label>
-						<h:inputText value="#{cadVendasMB.descricaoFormaPagamento}"
-							id="agencia" class="form-control" />
-					</div>
-					<div class="form-group col-md-3">
-						<label>Valor R$</label>
-						<h:inputText value="#{cadVendasMB.valorFormaPagamento}"
-							id="valorOrcamento" class="form-control"
-							style="text-align:right;">
-							<f:convertNumber pattern="##,###,###,###.##"
-								minFractionDigits="2" />
-						</h:inputText>
-					</div>
-					<div class="form-group col-md-3">
-						<label>-</label> <br />
-						<p:commandLink styleClass="btn btn-dark"
-							update="panelPagamentos, panelValorRestante, panelAdicionarPagamento"
-							value="Adicionar"
-							action="#{cadVendasMB.adicionarFormaPagamento()}" />
-					</div>
-				</div>
-			</h:panelGroup>
 			<h:panelGroup id="panelPagamentos">
 				<div class="form-row">
 					<p:dataTable id="idTabelaPagamentos" var="formapagamento"
@@ -248,52 +382,66 @@
 							<h:outputText value="#{formapagamento.descricao}" />
 
 						</p:column>
-						<p:column headerText="Valor" sortBy="#{formapagamento.valor}"
+						<p:column headerText="Valor Serviço"
 							style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:right;">
 							<h:outputText value="#{formapagamento.valor}">
 								<f:convertNumber pattern="##,###,###,###.##"
 									minFractionDigits="2" />
 							</h:outputText>
 						</p:column>
-						<p:column headerText=""
-							style="width:10%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
-							<p:commandLink
-								action="#{cadVendasMB.excluirFormaPagamento(rowIx)}"
-								style="text-align: left;color:black;"
-								update=":frmCadastroUsuario:panelPagamentos, :frmCadastroUsuario:panelValorRestante">
-								<img src="../../resources/img/excluir.svg" style="width: 18%;" />
-							</p:commandLink>
+						<p:column headerText="Desconto"
+							style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:right;">
+							<h:outputText value="#{formapagamento.desconto}">
+								<f:convertNumber pattern="##,###,###,###.##"
+									minFractionDigits="2" locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Quantidade"
+							style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:right;">
+							<h:outputText value="#{formapagamento.quantidade}">
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Valor Liquido"
+							style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:right;">
+							<h:outputText value="#{formapagamento.valorliquido}">
+								<f:convertNumber pattern="##,###,###,###.##"
+									minFractionDigits="2" locale="pt_BR" />
+							</h:outputText>
 						</p:column>
 					</p:dataTable>
 				</div>
 			</h:panelGroup>
 			<br />
+
 			<h6>Formas de Pagamento</h6>
 			<hr />
 
-			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label>Tipo de Pagamento</label>
-					<h:selectOneMenu id="tipodocumento"
-						value="#{cadVendasMB.contasreceber.formapagamento}"
-						styleClass="form-control">
-						<f:selectItem itemLabel="Boleto" itemValue="Boleto" />
-						<f:selectItem itemLabel="Cartão Crédito"
-							itemValue="Cartão Crédito" />
-					</h:selectOneMenu>
-				</div>
-				<div class="form-group col-md-3">
-					<label>Data Vencimento</label>
-					<p:inputMask mask="99/99/9999"
-						value="#{cadVendasMB.contasreceber.datavencimento}"
-						style="border:0px;font-size:14px;" class="form-control"
-						id="dataVencimentoPagamento">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</p:inputMask>
-				</div>
-			</div>
 			<h:panelGroup id="panelCalculoPagamento">
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label>Tipo de Pagamento</label>
+						<h:selectOneMenu id="tipodocumento"
+							value="#{cadVendasMB.contasreceber.formapagamento}"
+							styleClass="form-control">
+							<f:selectItem itemLabel="Boleto" itemValue="Boleto" />
+							<f:selectItem itemLabel="Cartão Crédito"
+								itemValue="Cartão Crédito" />
+							<f:selectItem itemLabel="Depósito" itemValue="Depósito" />
+							<f:selectItem itemLabel="Transferência" itemValue="Transferência" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Data Vencimento</label>
+						<p:calendar locale="pt_BR" pattern="dd/MM/yyyy"
+							value="#{cadVendasMB.contasreceber.datavencimento}"
+							style="font-size:14px;" id="dataVencimentoPagamento">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="America/Sao_Paulo" />
+							<p:ajax event="dateSelect" />
+							<p:ajax event="blur" />
+						</p:calendar>
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label>Valor a Parcelar R$</label>
@@ -301,40 +449,19 @@
 							style="text-align:right;" id="valorParcelarPagamento"
 							class="form-control">
 							<f:convertNumber pattern="##,###,###,###.##"
-								minFractionDigits="2" />
-							<p:ajax event="change"
-								listener="#{cadVendasMB.calcularParcelas()}"
-								update="panelCalculoPagamento, panelValorRestante" />
+								minFractionDigits="2" locale="pt_BR" />
+							<p:ajax event="change" />
 						</h:inputText>
 					</div>
 					<div class="form-group col-md-3">
 						<label>Número Parcelas</label>
 						<h:inputText value="#{cadVendasMB.contasreceber.nparcela}"
 							id="numeroParcelasPagamento" class="form-control">
-							<p:ajax event="change"
+							<p:ajax event="blur" process="@this"
 								listener="#{cadVendasMB.calcularParcelas()}"
-								update="panelCalculoPagamento, panelValorRestante" />
+								update="panelTabelaContas, panelCalculoPagamento" />
 						</h:inputText>
 					</div>
-					<div class="form-group col-md-3">
-						<label>Valor da Parcela R$</label>
-						<h:inputText value="#{cadVendasMB.contasreceber.valorparcela}"
-							id="valorParcelaPagamento" class="form-control" readonly="true"
-							style="text-align:right;">
-							<f:convertNumber pattern="##,###,###,###.##"
-								minFractionDigits="2" />
-						</h:inputText>
-					</div>
-					<div class="form-group col-md-3">
-						<label>-</label> <br />
-						<p:commandLink styleClass="btn btn-dark"
-							update="panelValorRestante, panelTabelaContas, panelCalculoPagamento"
-							value="Adicionar" action="#{cadVendasMB.adicionarContas()}" />
-					</div>
-				</div>
-			</h:panelGroup>
-			<h:panelGroup id="panelValorRestante">
-				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label>Valor Restante R$</label>
 						<h:inputText value="#{cadVendasMB.valorRestante}" readonly="true"
@@ -342,7 +469,7 @@
 							placeholder="Digito da agência"
 							style="text-align:right;color:red;">
 							<f:convertNumber pattern="##,###,###,###.##"
-								minFractionDigits="2" />
+								minFractionDigits="2" locale="pt_BR" />
 						</h:inputText>
 					</div>
 					<div class="form-group col-md-3">
@@ -352,7 +479,7 @@
 							placeholder="Digito da agência"
 							style="text-align:right;color:blue;">
 							<f:convertNumber pattern="##,###,###,###.##"
-								minFractionDigits="2" />
+								minFractionDigits="2" locale="pt_BR" />
 						</h:inputText>
 					</div>
 				</div>
@@ -384,14 +511,14 @@
 							style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
 							<h:outputText value="#{contas.valorparcela}">
 								<f:convertNumber pattern="##,###,###,###.##"
-									minFractionDigits="2" />
+									minFractionDigits="2" locale="pt_BR" />
 							</h:outputText>
 						</p:column>
 						<p:column headerText=""
 							style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
 							<p:commandLink action="#{cadVendasMB.excluirContas(rowIx)}"
 								style="text-align: left;color:black;"
-								update=":frmCadastroUsuario:panelTabelaContas, :frmCadastroUsuario:panelValorRestante">
+								update=":frmCadastroUsuario:panelTabelaContas, :frmCadastroUsuario:panelCalculoPagamento">
 								<img src="../../resources/img/excluir.svg" style="width: 30%;" />
 							</p:commandLink>
 						</p:column>

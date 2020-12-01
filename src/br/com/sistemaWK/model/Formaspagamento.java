@@ -30,6 +30,14 @@ public class Formaspagamento implements Serializable{
 	private String descricao;
 	@Column(name = "valor")
 	private float valor;
+	@Column(name = "servico")
+	private boolean servico;
+	@Column(name = "desconto")
+	private float desconto;
+	@Column(name = "valorliquido")
+	private float valorliquido;
+	@Column(name = "quantidade")
+	private int quantidade;
 	@JoinColumn(name = "vendas_idvendas", referencedColumnName = "idvendas")
 	@ManyToOne(optional = false)
 	private Vendas vendas;
@@ -92,6 +100,54 @@ public class Formaspagamento implements Serializable{
 	
 	
 	
+	public boolean isServico() {
+		return servico;
+	}
+
+
+
+	public void setServico(boolean servico) {
+		this.servico = servico;
+	}
+
+
+
+	public float getDesconto() {
+		return desconto;
+	}
+
+
+
+	public void setDesconto(float desconto) {
+		this.desconto = desconto;
+	}
+
+
+
+	public float getValorliquido() {
+		return valorliquido;
+	}
+
+
+
+	public void setValorliquido(float valorliquido) {
+		this.valorliquido = valorliquido;
+	}
+
+
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		int hash = 0;

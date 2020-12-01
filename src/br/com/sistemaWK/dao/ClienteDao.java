@@ -63,4 +63,19 @@ public class ClienteDao {
 		manager.close();
 		return cliente;
 	}
+	
+	
+	public void excluir(int idcliente) {
+    	EntityManager manager;
+    	manager = ConectionFactory.getConnection();
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+        Query q = manager.createQuery("Select c from Cliente c where c.idcliente=" + idcliente);
+        if (q.getResultList().size()>0){
+        	Cliente cliente = (Cliente) q.getResultList().get(0);
+            manager.remove(cliente);
+        }
+        tx.commit();
+        manager.close();
+    }
 }

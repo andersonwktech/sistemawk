@@ -68,8 +68,7 @@ public class CadClienteMB implements Serializable{
 				posicao = posicao - 1;
 			}
 			String tipo = endereco.getLogradouro().substring(0, posicao + 1);
-			cliente.setLogradouro(logradouro);
-			cliente.setTipologradouro(tipo);
+			cliente.setLogradouro(tipo + " " + logradouro);
 		}
 	}
 	

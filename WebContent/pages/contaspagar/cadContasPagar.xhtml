@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<h:form id="frmCadastroUsuario" acceptcharset="UTF-8">
+
+			<div id="tudo">
+				<div style="display: block; padding: 4.1em;">
+
+					<h4>Cadastro de Contas a Pagar</h4>
+					<hr />
+					<br />
+					<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Fornecedor</label>
+							<h:selectOneMenu id="exampleTipoServicos" style="width: 100%;"
+								immediate="true" value="#{cadServicosMB.tiposervicos}"
+								converter="TipoServicosConverter" styleClass="form-control">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{cadServicosMB.listaTipoServicos}"
+									var="tipoServicosSelecionado"
+									itemLabel="#{tipoServicosSelecionado.descricao}"
+									itemValue="#{tipoServicosSelecionado}" />
+								<f:attribute name="listaTipoServicos"
+									value="#{cadServicosMB.listaTipoServicos}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Categoria</label>
+							<h:selectOneMenu id="exampleConsultor" style="width: 100%;"
+								immediate="true" value="#{cadServicosMB.consultores}"
+								converter="ConsultoresConverter" styleClass="form-control">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{cadServicosMB.listaConsultores}"
+									var="consultoresSelecionado"
+									itemLabel="#{consultoresSelecionado.nome}"
+									itemValue="#{consultoresSelecionado}" />
+								<f:attribute name="listaConsultores"
+									value="#{cadServicosMB.listaConsultores}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Descrição</label>
+							<h:inputText value="#{cadServicosMB.servicos.nomeservicos}"
+								class="form-control" placeholder="Email" />
+						</div>
+						<div class="form-group col-md-6">
+							<label>Banco</label>
+							<h:selectOneMenu id="exampleConsultor" style="width: 100%;"
+								immediate="true" value="#{cadServicosMB.consultores}"
+								converter="ConsultoresConverter" styleClass="form-control">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{cadServicosMB.listaConsultores}"
+									var="consultoresSelecionado"
+									itemLabel="#{consultoresSelecionado.nome}"
+									itemValue="#{consultoresSelecionado}" />
+								<f:attribute name="listaConsultores"
+									value="#{cadServicosMB.listaConsultores}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<br />
+					<h6>Formas de Pagamento</h6>
+					<hr />
+
+					<h:panelGroup id="panelCalculoPagamento">
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label>Tipo de Pagamento</label>
+								<h:selectOneMenu id="tipodocumento"
+									value="#{cadVendasMB.contasreceber.formapagamento}"
+									styleClass="form-control">
+									<f:selectItem itemLabel="Boleto" itemValue="Boleto" />
+									<f:selectItem itemLabel="Cartão Crédito"
+										itemValue="Cartão Crédito" />
+									<f:selectItem itemLabel="Depósito" itemValue="Depósito" />
+									<f:selectItem itemLabel="Transferência"
+										itemValue="Transferência" />
+								</h:selectOneMenu>
+							</div>
+							<div class="form-group col-md-3">
+								<label>Data Vencimento</label>
+								<p:calendar locale="pt_BR" pattern="dd/MM/yyyy"
+									value="#{cadVendasMB.contasreceber.datavencimento}"
+									style="font-size:14px;" id="dataVencimentoPagamento">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+									<p:ajax event="dateSelect" />
+									<p:ajax event="blur" />
+								</p:calendar>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label>Valor a Parcelar R$</label>
+								<h:inputText value="#{cadVendasMB.valorParcelar}"
+									style="text-align:right;" id="valorParcelarPagamento"
+									class="form-control">
+									<f:convertNumber pattern="##,###,###,###.##"
+										minFractionDigits="2" locale="pt_BR" />
+									<p:ajax event="change" />
+								</h:inputText>
+							</div>
+							<div class="form-group col-md-3">
+								<label>Número Parcelas</label>
+								<h:inputText value="#{cadVendasMB.contasreceber.nparcela}"
+									id="numeroParcelasPagamento" class="form-control">
+									<p:ajax event="blur" process="@this"
+										listener="#{cadVendasMB.calcularParcelas()}"
+										update="panelValorRestante, panelTabelaContas, panelCalculoPagamento" />
+								</h:inputText>
+							</div>
+							<div class="form-group col-md-3">
+								<label>Quantidade</label>
+								<h:inputText value="#{cadVendasMB.contasreceber.valorparcela}"
+									id="valorParcelaPagamento" class="form-control" readonly="true"
+									style="text-align:right;">
+									<f:convertNumber pattern="##,###,###,###.##"
+										minFractionDigits="2" locale="pt_BR" />
+								</h:inputText>
+							</div>
+							<div class="form-group col-md-3">
+								<label>Desconto R$</label>
+								<h:inputText value="#{cadVendasMB.vendas.valorvenda}"
+									readonly="true" id="valorTotalVenda" class="form-control"
+									placeholder="Digito da agência"
+									style="text-align:right;color:blue;">
+									<f:convertNumber pattern="##,###,###,###.##"
+										minFractionDigits="2" locale="pt_BR" />
+								</h:inputText>
+							</div>
+						</div>
+						<div class="form-row">
+							<p:commandLink id="btncontratante" value="Adicionar Cliente"
+								action="#{cadVendasMB.adicionarCliente()}"
+								styleClass="btn btn-dark"
+								rendered="#{cadVendasMB.tiposervicos.dadoscliente==true}">
+							</p:commandLink>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup id="panelTabelaContas">
+						<div class="form-row">
+							<p:dataTable id="idTabelaContas" var="contas"
+								value="#{cadVendasMB.listaContasReceber}" style="border:none;"
+								class="tabelacontas" scrollRows="10" scrollable="true"
+								scrollHeight="200" rowIndexVar="rowIx">
+
+								<p:column headerText="Parcela" sortBy="#{contas.numeroparcela}"
+									style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+									<h:outputText value="#{contas.numeroparcela}" />
+								</p:column>
+								<p:column headerText="Data Vencimento"
+									sortBy="#{contas.datavencimento}"
+									style="width:25%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+									<h:outputText value="#{contas.datavencimento}">
+										<f:convertDateTime pattern="dd/MM/yyyy"
+											timeZone="America/Sao_Paulo" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="Pagamento"
+									sortBy="#{contas.formapagamento}"
+									style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+									<h:outputText value="#{contas.formapagamento}" />
+								</p:column>
+								<p:column headerText="Valor" sortBy="#{contas.valorparcela}"
+									style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+									<h:outputText value="#{contas.valorparcela}">
+										<f:convertNumber pattern="##,###,###,###.##"
+											minFractionDigits="2" locale="pt_BR" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText=""
+									style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+									<p:commandLink action="#{cadVendasMB.excluirContas(rowIx)}"
+										style="text-align: left;color:black;"
+										update=":frmCadastroUsuario:panelTabelaContas, :frmCadastroUsuario:panelValorRestante">
+										<img src="../../resources/img/excluir.svg" style="width: 30%;" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</div>
+					</h:panelGroup>
+					<br /> <br />
+
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							<label>Observações</label>
+							<h:inputTextarea value="#{cadVendasMB.vendas.observacao}"
+								id="parcelasrestantes" class="form-control"
+								placeholder="Parcelas Restantes" rows="5">
+							</h:inputTextarea>
+						</div>
+					</div>
+
+					<br />
+					<hr />
+					<div align="center">
+
+						<p:commandLink ajax="false" update="growl"
+							styleClass="btn btn-success" value="Confirmar"
+							action="#{cadServicosMB.salvar()}" />
+
+						<p:commandLink ajax="false" styleClass="btn btn-danger"
+							style="margin-left:1%;" value="Cancelar"
+							action="#{cadServicosMB.cancelar()}" />
+
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

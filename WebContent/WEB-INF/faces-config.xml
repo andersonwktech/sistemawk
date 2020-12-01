@@ -152,6 +152,56 @@
 	</navigation-rule>
 	
 	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consTurma</from-outcome>
+			<to-view-id>/pages/servicos/consTurma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consContasPagar</from-outcome>
+			<to-view-id>/pages/contaspagar/consContasPagar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadContasPagar</from-outcome>
+			<to-view-id>/pages/contaspagar/cadContasPagar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consFornecedor</from-outcome>
+			<to-view-id>/pages/fornecedor/consFornecedor.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadFornecedor</from-outcome>
+			<to-view-id>/pages/fornecedor/cadFornecedor.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
 	<application>
         <action-listener>
             org.primefaces.application.DialogActionListener

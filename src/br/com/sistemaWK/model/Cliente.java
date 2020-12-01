@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,8 +29,6 @@ public class Cliente implements Serializable{
 	private String email;
 	@Column(name = "telefonecelular")
 	private String telefonecelular;
-	@Column(name = "tipologradouro")
-	private String tipologradouro;
 	@Column(name = "logradouro")
 	private String logradouro;
 	@Column(name = "numero")
@@ -49,9 +45,8 @@ public class Cliente implements Serializable{
 	private String complemento;
 	@Column(name = "cpf")
 	private String cpf;
-	@JoinColumn(name = "contratante_idcontratante", referencedColumnName = "idcontratante")
-	@ManyToOne(optional = false)
-	private Contratante contratante;
+	@Column(name = "financeiro")
+	private boolean financeiro;
 	
 	
 	
@@ -117,18 +112,6 @@ public class Cliente implements Serializable{
 
 	public void setTelefonecelular(String telefonecelular) {
 		this.telefonecelular = telefonecelular;
-	}
-
-
-
-	public String getTipologradouro() {
-		return tipologradouro;
-	}
-
-
-
-	public void setTipologradouro(String tipologradouro) {
-		this.tipologradouro = tipologradouro;
 	}
 
 
@@ -229,8 +212,12 @@ public class Cliente implements Serializable{
 
 
 
-	public Contratante getContratante() {
-		return contratante;
+
+
+
+
+	public boolean isFinanceiro() {
+		return financeiro;
 	}
 
 
@@ -239,8 +226,8 @@ public class Cliente implements Serializable{
 
 
 
-	public void setContratante(Contratante contratante) {
-		this.contratante = contratante;
+	public void setFinanceiro(boolean financeiro) {
+		this.financeiro = financeiro;
 	}
 
 

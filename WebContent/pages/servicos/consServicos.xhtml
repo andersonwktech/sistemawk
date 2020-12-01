@@ -30,10 +30,6 @@
 					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
 					<h:outputText value="#{servicos.nomeservicos}" />
 				</p:column>
-				<p:column headerText="Consultor" 
-					style="width:15%; font-size:12px; background:white; color:black; border:none;text-align:left;">
-					<h:outputText value="#{servicos.consultores.nome}" />
-				</p:column>
 				<p:column headerText="Valor"
 					style="width:15%; text-align:right; font-size:12px; background:white; color:black; border:#fff;">
 					<h:outputText value="#{servicos.valor}" >
@@ -46,6 +42,10 @@
 					<p:commandLink ajax="false" action="#{servicosMB.editar(servicos)}"
 						style="text-align: left;color:black;">
 						<span data-feather="edit"></span>
+					</p:commandLink>
+					<p:commandLink ajax="false" action="#{servicosMB.turma(servicos)}"
+						style="text-align: left;color:black;">
+						<span data-feather="users"></span>
 					</p:commandLink>
 					<p:commandLink ajax="false" action="#{servicosMB.ativarDesativarServicos(servicos)}"  update=":frmConsultaservicos:growl, idTabelaservicos" 
 						style="text-align: left;color:black;">

@@ -28,4 +28,10 @@ private ClienteDao clienteDao;
 		clienteDao = new ClienteDao();
 		return clienteDao.consultarCPF(cpfcliente);
 	}
+	
+	
+	public void excluir(int idcliente) {
+		clienteDao = new ClienteDao();
+		clienteDao.excluir(idcliente);
+	}
 }

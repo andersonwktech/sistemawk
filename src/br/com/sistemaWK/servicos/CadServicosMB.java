@@ -46,7 +46,10 @@ public class CadServicosMB implements Serializable{
 			servicos.setDescricaoativo("check");
 		}else {
 			tiposervicos = servicos.getTiposervicos();
-			consultores = servicos.getConsultores();
+			if (servicos.isConsultorvinculado()) {
+				ConsultoresFacade consultoresFacade = new ConsultoresFacade();
+				consultores = consultoresFacade.consultar(servicos.getIdconsultores());
+			}
 		}
 		listarConsultores();
 		listarTipoServicos();
@@ -121,7 +124,13 @@ public class CadServicosMB implements Serializable{
 	
 	public String salvar() {
 		if (validarDados()) {
-			servicos.setConsultores(consultores);
+			if (consultores == null || consultores.getIdconsultores() == null) {
+				servicos.setIdconsultores(0);
+				servicos.setConsultorvinculado(false);
+			}else {
+				servicos.setIdconsultores(consultores.getIdconsultores());
+				servicos.setConsultorvinculado(true);
+			}
 			servicos.setTiposervicos(tiposervicos);
 			ServicosFacade servicosFacade = new ServicosFacade();
 			servicosFacade.salvar(servicos);
@@ -139,11 +148,6 @@ public class CadServicosMB implements Serializable{
 		
 		if (tiposervicos == null || tiposervicos.getIdtiposervicos() == null) {
 			Mensagem.lancarMensagemInfo("Atenção", "Informe o tipo de serviço");
-			return false;
-		}
-		
-		if (consultores == null || consultores.getIdconsultores() == null) {
-			Mensagem.lancarMensagemInfo("Atenção", "Informe o consultor responsável");
 			return false;
 		}
 		return true;

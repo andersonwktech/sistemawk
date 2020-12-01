@@ -7,7 +7,7 @@
 
 <ui:composition template="/pages/templates/padrao.xhtml">
 	<ui:define name="corpo">
-		<h:form id="frmCadastroUsuario" acceptcharset="ISO-8859-1">
+		<h:form id="frmCadastroUsuario" acceptcharset="UTF-8">
 
 			<div id="tudo">
 				<div style="display: block; padding: 4.1em;">
@@ -60,7 +60,7 @@
 							<h:inputText value="#{cadServicosMB.servicos.valor}"
 								class="form-control" style="text-align:right;">
 								<f:convertNumber pattern="##,###,###,###.##"
-									minFractionDigits="2" />
+									minFractionDigits="2" locale="pt_BR"/>
 							</h:inputText>
 						</div>
 					</div>

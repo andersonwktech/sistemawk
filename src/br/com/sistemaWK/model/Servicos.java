@@ -38,9 +38,11 @@ public class Servicos implements Serializable{
 	@JoinColumn(name = "tiposervicos_idtiposervicos", referencedColumnName = "idtiposervicos")
 	@ManyToOne(optional = false)
 	private Tiposervicos tiposervicos;
-	@JoinColumn(name = "consultores_idconsultores", referencedColumnName = "idconsultores")
-	@ManyToOne(optional = false)
-	private Consultores consultores;
+	@Column(name = "idconsultores")
+	private int idconsultores;
+	@Column(name = "consultorvinculado")
+	private boolean consultorvinculado;
+	
 	
 	
 	
@@ -178,8 +180,8 @@ public class Servicos implements Serializable{
 
 
 
-	public Consultores getConsultores() {
-		return consultores;
+	public int getIdconsultores() {
+		return idconsultores;
 	}
 
 
@@ -188,8 +190,28 @@ public class Servicos implements Serializable{
 
 
 
-	public void setConsultores(Consultores consultores) {
-		this.consultores = consultores;
+	public void setIdconsultores(int idconsultores) {
+		this.idconsultores = idconsultores;
+	}
+
+
+
+
+
+
+
+	public boolean isConsultorvinculado() {
+		return consultorvinculado;
+	}
+
+
+
+
+
+
+
+	public void setConsultorvinculado(boolean consultorvinculado) {
+		this.consultorvinculado = consultorvinculado;
 	}
 
 

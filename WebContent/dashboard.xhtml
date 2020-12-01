@@ -17,6 +17,16 @@
 	<link href="resources/csslocal/dashboard.css" rel="stylesheet" />
 
 
+<!-- Pace -->
+        <link href="resources/css/pace.css" rel="stylesheet"/>
+
+        <!-- Color box -->
+        <link href="resources/css/colorbox/colorbox.css" rel="stylesheet"/>
+
+        <!-- Morris -->
+        <link href="resources/css/morris.css" rel="stylesheet"/>	
+
+        
 
 	<title></title>
 </h:head>
@@ -77,32 +87,28 @@
 										</a></li>
 									</ul></li>
 							</h:panelGroup>
-							<h:panelGroup rendered="false">
+							<h:panelGroup rendered="true">
 								<li class="nav-item, dropdown"><a class="nav-link" href="#"
 									data-toggle="dropdown" role="button" aria-haspopup="true"
-									aria-expanded="false"> <span data-feather="file-plus"
+									aria-expanded="false"> <span data-feather="dollar-sign"
 										class="text-light"></span> <b class="text-light">Financeiro</b>
 								</a>
 									<ul class="dropdown-menu">
 										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/revisaovidas/inicioInscricaoRv.jsf"> <span
-												data-feather="file-text"></span> Formulário
-										</a></li>
-										<li style="font-size: 12px;"><a class="nav-link"
-											href="pages/revisaovidas/consRevisaoVidas.jsf"> <span
-												data-feather="list"></span> Lançamentos
+											href="pages/contaspagar/consContasPagar.jsf"> <span
+												data-feather="dollar-sign"></span> Contas a Pagar
 										</a></li>
 									</ul></li>
 							</h:panelGroup>
 							<li class="nav-item, dropdown"><a class="nav-link" href="#"
 								data-toggle="dropdown" role="button" aria-haspopup="true"
-								aria-expanded="false"> <span data-feather="file-plus"
+								aria-expanded="false"> <span data-feather="shopping-cart"
 									class="text-light"></span> <b class="text-light">Vendas</b>
 							</a>
 								<ul class="dropdown-menu">
 									<li style="font-size: 12px;"><a class="nav-link"
 										href="pages/vendas/consVendas.jsf"> <span
-											data-feather="file-text"></span> Lançamentos
+											data-feather="shopping-cart"></span> Lançamentos
 									</a></li>
 								</ul></li>
 							<li class="nav-item"><a class="nav-link"
@@ -116,8 +122,13 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+					
+					<h2>Dashboard</h2>
+					<br/><br/>
+					<p:chart type="bar" model="#{grafico.animatedModel2}" style="height:300px;background-color:black;"/>
+					<br/>
 					<h4>Últimas Vendas</h4>
+					<hr/>
 					<div class="row" style="color: white;">
 						<p:dataTable id="idTabelaVendas" var="vendas"
 							value="#{dashboardMB.listaVendas}" 
@@ -171,39 +182,7 @@
 		<!-- Gráficos -->
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-		<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-				type : 'line',
-				data : {
-					labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
-							"Thursday", "Friday", "Saturday" ],
-					datasets : [ {
-						data : [ 15339, 21345, 18483, 24003, 23489, 24092,
-								12034 ],
-						lineTension : 0,
-						backgroundColor : 'transparent',
-						borderColor : '#007bff',
-						borderWidth : 4,
-						pointBackgroundColor : '#007bff'
-					} ]
-				},
-				options : {
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : false
-							}
-						} ]
-					},
-					legend : {
-						display : false,
-					}
-				}
-			});
-		</script>
-
-
+		
 		<!-- JavaScript (Opcional) -->
 		<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

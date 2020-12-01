@@ -37,6 +37,21 @@ public class ContratanteDao {
 		manager.close();
 		return contratante;
 	}
+	
+	public Contratante consultarCPFCNPJ(String cpfcnpj) {
+		EntityManager manager;
+		manager = ConectionFactory.getConnection();
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		Query q = manager.createQuery("select c from Contratante c where c.cpfcnpj='" + cpfcnpj + "'");
+		Contratante contratante = null;
+		if (q.getResultList().size() > 0) {
+			contratante = (Contratante) q.getResultList().get(0);
+		}
+		tx.commit();
+		manager.close();
+		return contratante;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Contratante> lista(String sql) {

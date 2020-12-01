@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/pages/templates/padrao.xhtml">
+	<ui:define name="corpo">
+		<br />
+		<h:form id="frmConsultaservicos">
+			<h4>Consulta de Turma</h4>
+			<hr />
+			<br />
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<b><p:outputLabel value="Tipo de Serviço: " /></b> <br />
+					<p:outputLabel value="#{turmaMB.servicos.tiposervicos.descricao}" />
+				</div>
+				<div class="form-group col-md-6">
+					<b><p:outputLabel value="Serviço:" /></b> <br />
+					<p:outputLabel value="#{turmaMB.servicos.nomeservicos}" />
+				</div>
+			</div>
+			<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+			<br/>
+			<h4>Turma</h4>
+			<hr/>
+			<div align="left">
+				<p:commandLink ajax="false" styleClass="btn btn-danger"
+					value="Voltar" action="#{turmaMB.voltar()}" />
+			</div>
+			<br />
+			<p:dataTable id="idTabelaservicos" var="turma"
+				value="#{turmaMB.listaTurma}" style="border:none;"
+				class="tabelacontas" scrollRows="10" scrollable="true"
+				scrollHeight="300" selectionMode="single"
+				rowKey="#{turma.idvendascliente}">
+
+
+
+				<p:column headerText="Nome"
+					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{turma.cliente.nome}" />
+				</p:column>
+				<p:column headerText="Contratante"
+					style="width:32%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{turma.vendas.contratante.cpfcnpj}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -27,7 +27,7 @@ public class ConsultoresDao {
 		manager = ConectionFactory.getConnection();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
-		Query q = manager.createQuery("select p from Consultores c where c.idconsultores=" + idconsultores);
+		Query q = manager.createQuery("select c from Consultores c where c.idconsultores=" + idconsultores);
 		Consultores consultores = null;
 		if (q.getResultList().size() > 0) {
 			consultores = (Consultores) q.getResultList().get(0);

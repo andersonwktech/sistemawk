@@ -25,6 +25,14 @@ public class Contratante implements Serializable{
     private Integer idcontratante;
 	@Column(name = "cpfcnpj")
 	private String cpfcnpj;
+	@Column(name = "tipopessoa")
+	private String tipopessoa;
+	@Column(name = "nomefantasia")
+	private String nomefantasia;
+	@Column(name = "razaosocial")
+	private String razaosocial;
+	@Column(name = "endereco")
+	private String endereco;
 	
 	
 	public Contratante() {
@@ -54,6 +62,46 @@ public class Contratante implements Serializable{
 	
 	
 	
+	public String getTipopessoa() {
+		return tipopessoa;
+	}
+
+
+	public void setTipopessoa(String tipopessoa) {
+		this.tipopessoa = tipopessoa;
+	}
+
+
+	public String getNomefantasia() {
+		return nomefantasia;
+	}
+
+
+	public void setNomefantasia(String nomefantasia) {
+		this.nomefantasia = nomefantasia;
+	}
+
+
+	public String getRazaosocial() {
+		return razaosocial;
+	}
+
+
+	public void setRazaosocial(String razaosocial) {
+		this.razaosocial = razaosocial;
+	}
+
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
 	@Override
 	public int hashCode() {
 		int hash = 0;

@@ -18,7 +18,7 @@
 			<p:dataTable id="idTabelaVendas" var="vendas"
 				value="#{vendasMB.listaVendas}" style="border:none;"
 				class="tabelacontas" scrollRows="10" scrollable="true"
-				scrollHeight="300" selectionMode="single"
+				scrollHeight="350" selectionMode="single"
 				rowKey="#{vendas.idvendas}">
 
 				<p:column headerText="ID" 
@@ -33,17 +33,17 @@
 					</h:outputText>
 				</p:column>
 				<p:column headerText="Contratante" 
-					style="width:18%; font-size:12px; background:white; color:black; border:none;text-align:left;">
-					<h:outputText value="#{vendas.contratante.cpfcnpj}" />
+					style="width:30%; font-size:12px; background:white; color:black; border:none;text-align:left;">
+					<h:outputText value="#{vendas.contratante.nomefantasia}" />
 				</p:column>
 				<p:column headerText="Tipo Serviço"
 					
-					style="width:36%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					style="width:30%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
 					<h:outputText value="#{vendas.servicos.tiposervicos.descricao}" />
 				</p:column>
 				<p:column headerText="Serviço"
 					
-					style="width:36%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					style="width:30%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
 					<h:outputText value="#{vendas.servicos.nomeservicos}" />
 				</p:column>
 				<p:column headerText="Valor R$" sortBy=""
@@ -58,7 +58,7 @@
 						style="color:#{vendas.corstatus};" />
 				</p:column>
 				<p:column headerText=""
-					style="width:8%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
+					style="width:9%; text-align:left; font-size:12px; background:white; color:black; border:#fff;">
 					<p:commandLink ajax="false" action="#{vendasMB.editar(vendas)}"
 						style="text-align: left;color:black;">
 						<span data-feather="edit"></span>
